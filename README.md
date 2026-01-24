@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+## **MVP – LAND BORN MOROCCO Website Home Screen**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Project Goal:**
+A simple, attractive home page for Omar’s Moroccan tour services, highlighting tours, reviews, and contact info.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **1. Hero Section**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* Logo of the website
+* Website name: **LAND BORN MOROCCO**
+* Background: animated slideshow (showing Morocco landscapes)
+* Optional: short tagline, e.g., “Discover Morocco with Omar”
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **2. Our Tours Section**
 
-## Learn More
+* Grid/list of tours
+* Each tour includes:
 
-To learn more about Next.js, take a look at the following resources:
+  * Image
+  * Title
+  * Short description
+  * Price
+  * Duration (Days & Nights)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **3. About Omar**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Short introduction about Omar as a guide
+* Experience, specialties, or personal touch
 
-## Deploy on Vercel
+### **4. Reviews**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Customer reviews from Viator or TripAdvisor
+* Include name, rating, short comment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **5. Questions & Answers**
+
+* Common questions about tours
+* Short, clear answers
+
+### **6. Footer**
+
+* Contact info
+* Social media links
+* Privacy Policy
+* Optional: copyright
+
+ 
