@@ -108,7 +108,7 @@ export default function ReviewsSection() {
           </button>
 
           {/* Carousel Track */}
-          <div className="overflow-hidden">
+          <div className="overflow-hidden py-8 px-2">
             <motion.div
               className="flex"
               // Move by percentage based on how many items are visible
