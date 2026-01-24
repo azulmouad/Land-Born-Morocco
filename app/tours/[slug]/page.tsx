@@ -52,7 +52,7 @@ export default async function TourDetailsPage({
         <div className="mb-6">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-deep-blue mb-3">
+              <h1 className="text-3xl md:text-4xl lg:text-4xl font-heading font-bold text-deep-blue mb-3">
                 {tour.title}
               </h1>
               <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
@@ -75,10 +75,6 @@ export default async function TourDetailsPage({
               <button className="flex items-center gap-2 px-4 py-2 hover:bg-black/5 rounded-full transition-colors text-deep-blue font-medium text-sm">
                 <Share2 size={18} />
                 <span className="hidden md:inline">Share</span>
-              </button>
-              <button className="flex items-center gap-2 px-4 py-2 hover:bg-black/5 rounded-full transition-colors text-deep-blue font-medium text-sm">
-                <Heart size={18} />
-                <span className="hidden md:inline">Save</span>
               </button>
             </div>
           </div>
@@ -133,11 +129,14 @@ export default async function TourDetailsPage({
             </section>
 
             {/* Cancellation Policy */}
-            <section className="bg-orange-50 rounded-2xl p-6 border border-orange-100">
-              <h3 className="text-lg font-heading font-bold text-clay-dark mb-2">
+            {/* Cancellation Policy */}
+            <section className="pt-8 border-t border-gray-100">
+              <h3 className="text-xl font-heading font-bold text-deep-blue mb-3">
                 Cancellation Policy
               </h3>
-              <p className="text-gray-700 text-sm">{tour.cancellationPolicy}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                {tour.cancellationPolicy}
+              </p>
             </section>
           </div>
 
