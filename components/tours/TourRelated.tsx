@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Calendar, ArrowRight } from "lucide-react";
+import { Clock, Calendar } from "lucide-react";
 import { tours } from "@/data/tours";
 
 export default function TourRelated() {
@@ -12,42 +12,44 @@ export default function TourRelated() {
   return (
     <div className="grid md:grid-cols-3 gap-6 md:gap-8">
       {relatedTours.map((tour) => (
-        <Link
-          href={`/tours/${tour.slug}`}
+        <div
           key={tour.id}
-          className="block group"
+          className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
         >
-          <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
-            <div className="relative h-48 overflow-hidden">
-              <Image
-                src={tour.images[0]}
-                alt={tour.title}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg text-clay font-bold text-xs shadow-sm">
+          <div className="relative h-64 overflow-hidden">
+            <Image
+              src={tour.images[0]}
+              alt={tour.title}
+              fill
+              className="object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+
+          <div className="p-6">
+            <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
+              <div className="flex items-center">
+                <Clock size={16} className="text-sand mr-1" />
                 {tour.duration}
               </div>
-            </div>
-
-            <div className="p-5 flex-1 flex flex-col">
-              <h4 className="font-heading font-bold text-lg text-deep-blue mb-2 group-hover:text-clay transition-colors line-clamp-1">
-                {tour.title}
-              </h4>
-              <p className="text-sm text-gray-600 line-clamp-2 mb-4 flex-1">
-                {tour.overview}
-              </p>
-
-              <div className="flex items-center text-clay font-medium text-sm group/btn">
-                View Details{" "}
-                <ArrowRight
-                  size={16}
-                  className="ml-1 group-hover/btn:translate-x-1 transition-transform"
-                />
+              <div className="flex items-center">
+                <Calendar size={16} className="text-sand mr-1" />
+                Daily Dep.
               </div>
             </div>
+
+            <h4 className="text-xl font-bold text-deep-blue mb-2 font-heading group-hover:text-clay transition-colors">
+              {tour.title}
+            </h4>
+            <p className="text-gray-600 mb-6 line-clamp-2">{tour.overview}</p>
+
+            <Link
+              href={`/tours/${tour.slug}`}
+              className="w-full py-3 bg-deep-blue text-white rounded-xl font-medium hover:bg-clay transition-colors flex items-center justify-center"
+            >
+              View Details
+            </Link>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );
