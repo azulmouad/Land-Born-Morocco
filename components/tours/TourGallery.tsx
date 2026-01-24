@@ -45,7 +45,7 @@ export default function TourGallery({ images, title }: TourGalleryProps) {
   return (
     <>
       {/* Mobile Carousel */}
-      <div className="md:hidden relative h-[300px] overflow-hidden rounded-3xl">
+      <div className="md:hidden relative h-[300px] overflow-hidden rounded-t-3xl">
         <div className="relative h-full">
           <AnimatePresence mode="wait">
             <motion.div
