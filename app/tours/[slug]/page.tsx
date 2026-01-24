@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TourOverview from "@/components/tours/TourOverview";
 import TourHighlights from "@/components/tours/TourHighlights";
+import TourInclusions from "@/components/tours/TourInclusions";
 import TourGallery from "@/components/tours/TourGallery";
 import TourItinerary from "@/components/tours/TourItinerary";
 import TourBookingForm from "@/components/tours/TourBookingForm";
@@ -121,49 +122,6 @@ export default async function TourDetailsPage({
                 Itinerary
               </h2>
               <TourItinerary itinerary={tour.itinerary} />
-            </section>
-
-            {/* Included / Excluded */}
-            <section className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
-                <h3 className="text-xl font-heading font-bold text-deep-blue mb-6 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-olive/10 flex items-center justify-center">
-                    <Check size={18} className="text-olive" />
-                  </div>
-                  Included
-                </h3>
-                <ul className="space-y-3">
-                  {tour.included.map((item, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-3 text-sm md:text-base text-gray-700"
-                    >
-                      <Check size={18} className="text-olive shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
-                <h3 className="text-xl font-heading font-bold text-deep-blue mb-6 flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-clay/10 flex items-center justify-center">
-                    <X size={18} className="text-clay" />
-                  </div>
-                  Not Included
-                </h3>
-                <ul className="space-y-3">
-                  {tour.excluded.map((item, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-3 text-sm md:text-base text-gray-700"
-                    >
-                      <X size={18} className="text-clay shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </section>
 
             {/* Cancellation Policy */}

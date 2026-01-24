@@ -14,9 +14,11 @@ export default function TourHighlights({ highlights }: TourHighlightsProps) {
       <div className="grid md:grid-cols-2 gap-x-8 gap-y-3">
         {highlights.map((highlight, index) => (
           <div key={index} className="flex items-start gap-3 group">
-            <div className="w-5 h-5 rounded-full bg-sand/20 flex items-center justify-center shrink-0 mt-0.5">
-              <Check size={12} className="text-clay-dark" strokeWidth={3} />
-            </div>
+            <Check
+              size={18}
+              className="text-sand shrink-0 mt-0.5"
+              strokeWidth={2.5}
+            />
             <span className="text-gray-700 text-sm md:text-base leading-snug">
               {highlight}
             </span>
