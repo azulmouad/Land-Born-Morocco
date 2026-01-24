@@ -126,7 +126,7 @@ export default async function TourDetailsPage({
 
             {/* Itinerary */}
             <section>
-              <h2 className="text-3xl font-heading font-bold text-deep-blue mb-6">
+              <h2 className="text-xl font-heading font-bold text-deep-blue mb-4 flex items-center gap-2">
                 Itinerary
               </h2>
               <TourItinerary itinerary={tour.itinerary} />
