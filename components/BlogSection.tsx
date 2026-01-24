@@ -42,7 +42,7 @@ export default function BlogSection() {
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 md:gap-8 pb-8 md:pb-0 px-4 md:px-0 -mx-4 md:mx-0 snap-x snap-mandatory scrollbar-hide">
           {videoBlogs.map((post, index) => (
             <motion.div
               key={post.id}
@@ -50,7 +50,7 @@ export default function BlogSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group cursor-pointer"
+              className="flex-shrink-0 w-[85%] md:w-auto snap-center group cursor-pointer"
             >
               <div className="relative h-64 rounded-2xl overflow-hidden mb-6">
                 <Image

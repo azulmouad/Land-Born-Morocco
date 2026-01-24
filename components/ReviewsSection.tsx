@@ -68,11 +68,13 @@ export default function ReviewsSection() {
 
   // Auto-scroll
   useEffect(() => {
+    if (isMobile) return;
+
     const timer = setInterval(() => {
       nextSlide();
     }, 4000);
     return () => clearInterval(timer);
-  }, [currentIndex]); // Re-create interval on index change to reset timer
+  }, [currentIndex, isMobile]); // Re-create interval on index change to reset timer
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % reviews.length);
@@ -83,9 +85,14 @@ export default function ReviewsSection() {
   };
 
   return (
-    <section id="reviews" className="py-16 md:py-20 bg-cream relative group overflow-hidden">
+    <section
+      id="reviews"
+      className="py-16 md:py-20 bg-cream relative group overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 md:px-12 text-center">
-        <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">Testimonials</h2>
+        <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">
+          Testimonials
+        </h2>
         <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue mb-10 md:mb-16">
           What Our Guests Say
         </h3>
@@ -94,17 +101,17 @@ export default function ReviewsSection() {
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-20 bg-white/80 hover:bg-white text-deep-blue w-12 h-12 rounded-full shadow-lg backdrop-blur-sm transition-all transform hover:scale-110"
+            className="flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 md:-translate-x-4 lg:-translate-x-12 z-20 bg-white/80 hover:bg-white text-deep-blue w-10 h-10 md:w-12 md:h-12 rounded-full shadow-lg backdrop-blur-sm transition-all transform hover:scale-110"
             aria-label="Scroll left"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={20} className="md:w-6 md:h-6" />
           </button>
           <button
             onClick={nextSlide}
-            className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-20 bg-white/80 hover:bg-white text-deep-blue w-12 h-12 rounded-full shadow-lg backdrop-blur-sm transition-all transform hover:scale-110"
+            className="flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 md:translate-x-4 lg:translate-x-12 z-20 bg-white/80 hover:bg-white text-deep-blue w-10 h-10 md:w-12 md:h-12 rounded-full shadow-lg backdrop-blur-sm transition-all transform hover:scale-110"
             aria-label="Scroll right"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={20} className="md:w-6 md:h-6" />
           </button>
 
           {/* Carousel Track */}
@@ -115,24 +122,42 @@ export default function ReviewsSection() {
               // 1 item visible -> move 100% per index
               // 3 items visible -> move 33.333% per index
               animate={{
-                x: `-${currentIndex * movePercentage}%`
+                x: `-${currentIndex * movePercentage}%`,
               }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = Math.abs(offset.x) * velocity.x;
+
+                if (swipe < -10000 || offset.x < -100) {
+                  nextSlide();
+                } else if (swipe > 10000 || offset.x > 100) {
+                  prevSlide();
+                }
+              }}
             >
               {reviews.map((review, index) => (
                 <div
                   key={index}
                   className={clsx(
                     "flex-shrink-0 px-3",
-                    isMobile ? "w-[85%]" : "w-1/3"
+                    isMobile ? "w-[85%]" : "w-1/3",
                   )}
                 >
                   <div className="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-gray-100 relative h-full flex flex-col items-center text-center">
-                    <Quote className="absolute top-6 right-6 text-sand/20 transform rotate-180" size={32} />
-                    
+                    <Quote
+                      className="absolute top-6 right-6 text-sand/20 transform rotate-180"
+                      size={32}
+                    />
+
                     <div className="flex justify-center mb-6">
                       {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} size={18} className="text-sand fill-current" />
+                        <Star
+                          key={i}
+                          size={18}
+                          className="text-sand fill-current"
+                        />
                       ))}
                     </div>
 
@@ -141,8 +166,12 @@ export default function ReviewsSection() {
                     </p>
 
                     <div className="mt-auto">
-                      <h4 className="font-bold text-deep-blue text-base md:text-lg">{review.name}</h4>
-                      <p className="text-gray-400 text-xs md:text-sm">{review.location}</p>
+                      <h4 className="font-bold text-deep-blue text-base md:text-lg">
+                        {review.name}
+                      </h4>
+                      <p className="text-gray-400 text-xs md:text-sm">
+                        {review.location}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -158,7 +187,9 @@ export default function ReviewsSection() {
                 onClick={() => setCurrentIndex(idx)}
                 className={clsx(
                   "h-2 rounded-full transition-all duration-300",
-                  idx === currentIndex ? "bg-sand w-6" : "bg-gray-300 w-2 hover:bg-gray-400"
+                  idx === currentIndex
+                    ? "bg-sand w-6"
+                    : "bg-gray-300 w-2 hover:bg-gray-400",
                 )}
                 aria-label={`Go to slide ${idx + 1}`}
               />
