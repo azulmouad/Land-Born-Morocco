@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Grid } from "lucide-react";
@@ -13,6 +13,7 @@ interface TourGalleryProps {
 export default function TourGallery({ images, title }: TourGalleryProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [mobileCarouselIndex, setMobileCarouselIndex] = useState(0);
 
   // Show only first 5 images in the grid
   const displayImages = images.slice(0, 5);
@@ -31,12 +32,79 @@ export default function TourGallery({ images, title }: TourGalleryProps) {
     setPhotoIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  const nextMobileSlide = () => {
+    setMobileCarouselIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevMobileSlide = () => {
+    setMobileCarouselIndex(
+      (prev) => (prev - 1 + images.length) % images.length,
+    );
+  };
+
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-3 h-[300px] md:h-[400px] overflow-hidden rounded-3xl">
+      {/* Mobile Carousel */}
+      <div className="md:hidden relative h-[300px] overflow-hidden rounded-3xl">
+        <div className="relative h-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={mobileCarouselIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.3 }}
+              className="relative h-full w-full cursor-pointer"
+              onClick={() => openLightbox(mobileCarouselIndex)}
+            >
+              <Image
+                src={images[mobileCarouselIndex]}
+                alt={`${title} - ${mobileCarouselIndex + 1}`}
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevMobileSlide}
+            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 text-deep-blue hover:bg-white transition-colors z-10 shadow-lg"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={nextMobileSlide}
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 text-deep-blue hover:bg-white transition-colors z-10 shadow-lg"
+          >
+            <ChevronRight size={20} />
+          </button>
+
+          {/* Dots Indicator */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setMobileCarouselIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === mobileCarouselIndex ? "bg-white w-6" : "bg-white/50"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Image Counter */}
+          <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm text-white text-xs px-3 py-1.5 rounded-full">
+            {mobileCarouselIndex + 1} / {images.length}
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Grid */}
+      <div className="hidden md:grid grid-cols-4 gap-2 md:gap-3 h-[400px] overflow-hidden rounded-3xl">
         {/* Main large image */}
         <div
-          className="col-span-1 md:col-span-2 md:row-span-2 relative cursor-pointer group h-full"
+          className="col-span-2 row-span-2 relative cursor-pointer group h-full"
           onClick={() => openLightbox(0)}
         >
           <Image
@@ -48,7 +116,7 @@ export default function TourGallery({ images, title }: TourGalleryProps) {
         </div>
 
         {/* Smaller images */}
-        <div className="hidden md:flex flex-col gap-2 md:gap-3 h-full col-span-1">
+        <div className="flex flex-col gap-2 md:gap-3 h-full col-span-1">
           <div className="relative h-1/2 w-full cursor-pointer group overflow-hidden">
             <Image
               src={images[1]}
@@ -69,7 +137,7 @@ export default function TourGallery({ images, title }: TourGalleryProps) {
           </div>
         </div>
 
-        <div className="hidden md:flex flex-col gap-2 md:gap-3 h-full col-span-1">
+        <div className="flex flex-col gap-2 md:gap-3 h-full col-span-1">
           <div className="relative h-1/2 w-full cursor-pointer group overflow-hidden">
             <Image
               src={images[3]}
