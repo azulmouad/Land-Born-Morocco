@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import clsx from "clsx";
 
 const reviews = [
   {
@@ -25,45 +27,142 @@ const reviews = [
     rating: 5,
     text: "We were hesitant about booking a guide, but Omar was fantastic. He wasn't just a guide, he became a friend. The authentic meals we had with local families were priceless.",
   },
+  {
+    id: 4,
+    name: "Thomas Muller",
+    location: "Germany",
+    rating: 5,
+    text: "The Atlas Mountains trek was breathtaking. Omar organized everything perfectly. We felt very safe and comfortable. Eine wunderbare Erfahrung!",
+  },
+  {
+    id: 5,
+    name: "Jessica & Tom",
+    location: "USA",
+    rating: 5,
+    text: "We loved the Chefchaouen day trip. It is such a photogenic city! Our driver was punctual and very polite. Highly recommended for couples.",
+  },
+  {
+    id: 6,
+    name: "Elena Rodriguez",
+    location: "Spain",
+    rating: 5,
+    text: "Increíble viaje. The night in the desert was the best part. Sleeping under the stars is a must-do. Thank you Land Born Morocco!",
+  },
 ];
 
 export default function ReviewsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const itemsPerPage = isMobile ? 1 : 3;
+
+  // Auto-scroll
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [currentIndex]); // Re-create interval on index change to reset timer
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % reviews.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+  };
+
   return (
-    <section id="reviews" className="py-16 md:py-20 bg-cream">
+    <section id="reviews" className="py-16 md:py-20 bg-cream relative group overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-12 text-center">
         <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">Testimonials</h2>
         <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue mb-10 md:mb-16">
           What Our Guests Say
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-          {reviews.map((review, index) => (
+        <div className="relative">
+          {/* Navigation Buttons */}
+          <button
+            onClick={prevSlide}
+            className="hidden md:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-20 bg-white/80 hover:bg-white text-deep-blue w-12 h-12 rounded-full shadow-lg backdrop-blur-sm transition-all transform hover:scale-110"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="hidden md:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-20 bg-white/80 hover:bg-white text-deep-blue w-12 h-12 rounded-full shadow-lg backdrop-blur-sm transition-all transform hover:scale-110"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* Carousel Track */}
+          <div className="overflow-hidden">
             <motion.div
-              key={review.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 relative"
+              className="flex"
+              // Move by percentage based on how many items are visible
+              // 1 item visible -> move 100% per index
+              // 3 items visible -> move 33.333% per index
+              animate={{
+                x: `-${currentIndex * (100 / itemsPerPage)}%`
+              }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-              <Quote className="absolute top-6 right-6 text-sand/20 transform rotate-180" size={40} />
-              
-              <div className="flex justify-center mb-6">
-                {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} size={20} className="text-sand fill-current" />
-                ))}
-              </div>
+              {reviews.map((review, index) => (
+                <div
+                  key={index}
+                  className={clsx(
+                    "flex-shrink-0 px-3",
+                    isMobile ? "w-full" : "w-1/3"
+                  )}
+                >
+                  <div className="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-gray-100 relative h-full flex flex-col items-center text-center">
+                    <Quote className="absolute top-6 right-6 text-sand/20 transform rotate-180" size={32} />
+                    
+                    <div className="flex justify-center mb-6">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Star key={i} size={18} className="text-sand fill-current" />
+                      ))}
+                    </div>
 
-              <p className="text-gray-600 mb-8 italic leading-relaxed">
-                &quot;{review.text}&quot;
-              </p>
+                    <p className="text-gray-600 mb-6 italic leading-relaxed flex-grow text-sm md:text-base">
+                      &quot;{review.text}&quot;
+                    </p>
 
-              <div>
-                <h4 className="font-bold text-deep-blue text-lg">{review.name}</h4>
-                <p className="text-gray-400 text-sm">{review.location}</p>
-              </div>
+                    <div className="mt-auto">
+                      <h4 className="font-bold text-deep-blue text-base md:text-lg">{review.name}</h4>
+                      <p className="text-gray-400 text-xs md:text-sm">{review.location}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </motion.div>
-          ))}
+          </div>
+
+          {/* Indicators */}
+          <div className="flex justify-center gap-2 mt-8">
+            {reviews.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={clsx(
+                  "h-2 rounded-full transition-all duration-300",
+                  idx === currentIndex ? "bg-sand w-6" : "bg-gray-300 w-2 hover:bg-gray-400"
+                )}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
