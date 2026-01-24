@@ -64,6 +64,7 @@ export default function ReviewsSection() {
   }, []);
 
   const itemsPerPage = isMobile ? 1 : 3;
+  const movePercentage = isMobile ? 85 : 100 / 3;
 
   // Auto-scroll
   useEffect(() => {
@@ -114,7 +115,7 @@ export default function ReviewsSection() {
               // 1 item visible -> move 100% per index
               // 3 items visible -> move 33.333% per index
               animate={{
-                x: `-${currentIndex * (100 / itemsPerPage)}%`
+                x: `-${currentIndex * movePercentage}%`
               }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
@@ -123,7 +124,7 @@ export default function ReviewsSection() {
                   key={index}
                   className={clsx(
                     "flex-shrink-0 px-3",
-                    isMobile ? "w-full" : "w-1/3"
+                    isMobile ? "w-[85%]" : "w-1/3"
                   )}
                 >
                   <div className="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-gray-100 relative h-full flex flex-col items-center text-center">
