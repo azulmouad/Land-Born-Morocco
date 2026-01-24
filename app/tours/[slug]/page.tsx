@@ -8,6 +8,7 @@ import TourGallery from "@/components/tours/TourGallery";
 import TourItinerary from "@/components/tours/TourItinerary";
 import TourBookingForm from "@/components/tours/TourBookingForm";
 import TourRelated from "@/components/tours/TourRelated";
+import TourStickyNav from "@/components/tours/TourStickyNav";
 import { getTourBySlug } from "@/data/tours";
 import { Check, X, MapPin, Share2, Heart, Star } from "lucide-react";
 
@@ -46,6 +47,7 @@ export default async function TourDetailsPage({
   return (
     <main className="bg-cream min-h-screen">
       <Navbar variant="opaque" />
+      <TourStickyNav />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-24 md:pt-32 pb-12 md:pb-20">
         {/* Header Section */}
@@ -91,7 +93,7 @@ export default async function TourDetailsPage({
           <div className="lg:col-span-2 space-y-12">
             {/* Overview Stats */}
             {/* Description & Overview Stats */}
-            <section>
+            <section id="overview">
               <TourOverview
                 duration={tour.duration}
                 groupSize={tour.groupSize}
@@ -108,12 +110,12 @@ export default async function TourDetailsPage({
             </section>
 
             {/* Highlights */}
-            <section>
+            <section id="highlights">
               <TourHighlights highlights={tour.highlights} />
             </section>
 
             {/* Inclusions */}
-            <section>
+            <section id="inclusions">
               <TourInclusions
                 included={tour.included}
                 excluded={tour.excluded}
@@ -121,7 +123,7 @@ export default async function TourDetailsPage({
             </section>
 
             {/* Itinerary */}
-            <section>
+            <section id="itinerary">
               <h2 className="text-lg md:text-xl font-heading font-bold text-deep-blue mb-4 flex items-center gap-2">
                 Itinerary
               </h2>
@@ -141,7 +143,7 @@ export default async function TourDetailsPage({
           </div>
 
           {/* Right Column: Sticky Booking Form */}
-          <div className="relative">
+          <div id="booking" className="relative">
             <TourBookingForm />
           </div>
         </div>
