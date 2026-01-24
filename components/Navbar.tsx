@@ -14,7 +14,11 @@ const navLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({
+  variant = "transparent",
+}: {
+  variant?: "transparent" | "opaque";
+}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -27,19 +31,28 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Force opaque look if variant is opaque OR if scrolled
+  const showOpaque = variant === "opaque" || isScrolled;
+
   return (
     <nav
       className={clsx(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 px-4 md:py-4 md:px-12",
-        isScrolled
+        showOpaque
           ? "bg-white/95 backdrop-blur-md shadow-sm text-clay-dark"
-          : "bg-transparent text-white"
+          : "bg-transparent text-white",
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-xl md:text-2xl font-bold font-heading tracking-tight">
-          LAND BORN <span className={isScrolled ? "text-sand" : "text-sand-light"}>MOROCCO</span>
+        <Link
+          href="/"
+          className="text-xl md:text-2xl font-bold font-heading tracking-tight"
+        >
+          LAND BORN{" "}
+          <span className={showOpaque ? "text-sand" : "text-sand-light"}>
+            MOROCCO
+          </span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -48,7 +61,10 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium hover:text-sand transition-colors relative group"
+              className={clsx(
+                "text-sm font-medium transition-colors relative group",
+                showOpaque ? "hover:text-sand" : "hover:text-sand",
+              )}
             >
               {link.name}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sand transition-all duration-300 group-hover:w-full" />
@@ -58,9 +74,9 @@ export default function Navbar() {
             href="#contact"
             className={clsx(
               "px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-md hover:shadow-lg",
-              isScrolled
+              showOpaque
                 ? "bg-clay text-white hover:bg-clay-dark"
-                : "bg-white text-clay hover:bg-gray-100"
+                : "bg-white text-clay hover:bg-gray-100",
             )}
           >
             Book Now
@@ -69,7 +85,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2"
+          className={clsx("md:hidden p-2", showOpaque ? "" : "text-white")}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Clock, DollarSign, Calendar } from "lucide-react";
@@ -8,6 +10,7 @@ const tours = [
   {
     id: 1,
     title: "The Golden Desert Trek",
+    slug: "golden-sahara-trek",
     image: "/images/hero-1.png", // Reusing hero image for now
     description:
       "A 3-day journey into the heart of the Sahara. Camel rides, starry nights, and Berber hospitality.",
@@ -17,6 +20,7 @@ const tours = [
   {
     id: 2,
     title: "Imperial Cities Tour",
+    slug: "imperial-cities-tour",
     image: "/images/hero-2.png",
     description:
       "Discover the history of Fez, Marrakech, Rabat, and Meknes in this comprehensive cultural tour.",
@@ -26,6 +30,7 @@ const tours = [
   {
     id: 3,
     title: "Atlas Mountains Escape",
+    slug: "atlas-mountains-escape",
     image: "/images/hero-3.png",
     description:
       "Hike through the stunning Atlas Mountains and visit traditional Berber villages.",
@@ -35,6 +40,7 @@ const tours = [
   {
     id: 4,
     title: "Coastal Breeze",
+    slug: "imperial-cities-tour",
     image: "/images/hero-2.png", // Placeholder
     description:
       "Relax in Essaouira and Agadir. Fresh seafood, ocean views, and history.",
@@ -44,6 +50,7 @@ const tours = [
   {
     id: 5,
     title: "Grand Morocco Tour",
+    slug: "imperial-cities-tour",
     image: "/images/hero-1.png",
     description:
       "The ultimate 14-day adventure covering the entire country from North to South.",
@@ -53,6 +60,7 @@ const tours = [
   {
     id: 6,
     title: "Chefchaouen Day Trip",
+    slug: "atlas-mountains-escape",
     image: "/images/hero-2.png",
     description:
       "A day trip to the Blue Pearl of Morocco. Perfect for photography lovers.",
@@ -115,9 +123,12 @@ export default function ToursSection() {
                   {tour.description}
                 </p>
 
-                <button className="w-full py-3 bg-deep-blue text-white rounded-xl font-medium hover:bg-clay transition-colors flex items-center justify-center">
+                <Link
+                  href={`/tours/${tour.slug}`}
+                  className="w-full py-3 bg-deep-blue text-white rounded-xl font-medium hover:bg-clay transition-colors flex items-center justify-center"
+                >
                   View Details
-                </button>
+                </Link>
               </div>
             </motion.div>
           ))}
