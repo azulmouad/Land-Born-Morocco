@@ -116,6 +116,14 @@ export default async function TourDetailsPage({
               <TourHighlights highlights={tour.highlights} />
             </section>
 
+            {/* Inclusions */}
+            <section>
+              <TourInclusions
+                included={tour.included}
+                excluded={tour.excluded}
+              />
+            </section>
+
             {/* Itinerary */}
             <section>
               <h2 className="text-3xl font-heading font-bold text-deep-blue mb-6">
