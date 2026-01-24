@@ -14,52 +14,54 @@ export default function TourOverview({
   type,
 }: TourOverviewProps) {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 py-8 border-b border-gray-100">
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-cream rounded-xl text-sand">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8 mb-8 p-6 bg-cream/50 rounded-2xl border border-sand/10">
+      <div className="flex items-start gap-4">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-sand/10 text-sand shrink-0">
           <Clock size={20} />
         </div>
         <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+          <h4 className="font-heading font-bold text-deep-blue mb-1">
             Duration
-          </p>
-          <p className="text-deep-blue font-semibold">{duration}</p>
+          </h4>
+          <p className="text-gray-600 text-sm leading-snug">{duration}</p>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-cream rounded-xl text-sand">
+      <div className="flex items-start gap-4">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-sand/10 text-sand shrink-0">
           <Users size={20} />
         </div>
         <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+          <h4 className="font-heading font-bold text-deep-blue mb-1">
             Group Size
-          </p>
-          <p className="text-deep-blue font-semibold">{groupSize}</p>
+          </h4>
+          <p className="text-gray-600 text-sm leading-snug">{groupSize}</p>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-cream rounded-xl text-sand">
+      <div className="flex items-start gap-4">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-sand/10 text-sand shrink-0">
           <Languages size={20} />
         </div>
         <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+          <h4 className="font-heading font-bold text-deep-blue mb-1">
             Languages
+          </h4>
+          <p className="text-gray-600 text-sm leading-snug">
+            {languages.join(", ")}
           </p>
-          <p className="text-deep-blue font-semibold">{languages.join(", ")}</p>
         </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <div className="p-3 bg-cream rounded-xl text-sand">
+      <div className="flex items-start gap-4">
+        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-sand/10 text-sand shrink-0">
           <Map size={20} />
         </div>
         <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wide font-medium">
+          <h4 className="font-heading font-bold text-deep-blue mb-1">
             Tour Type
-          </p>
-          <p className="text-deep-blue font-semibold">{type}</p>
+          </h4>
+          <p className="text-gray-600 text-sm leading-snug">{type}</p>
         </div>
       </div>
     </div>

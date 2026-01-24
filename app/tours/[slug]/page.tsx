@@ -92,18 +92,19 @@ export default async function TourDetailsPage({
           {/* Left Column: Content */}
           <div className="lg:col-span-2 space-y-12">
             {/* Overview Stats */}
-            <TourOverview
-              duration={tour.duration}
-              groupSize={tour.groupSize}
-              languages={tour.languages}
-              type={tour.type}
-            />
-
-            {/* Description */}
+            {/* Description & Overview Stats */}
             <section>
               <h2 className="text-3xl font-heading font-bold text-deep-blue mb-6">
                 Overview
               </h2>
+
+              <TourOverview
+                duration={tour.duration}
+                groupSize={tour.groupSize}
+                languages={tour.languages}
+                type={tour.type}
+              />
+
               <p className="text-gray-600 leading-relaxed text-lg">
                 {tour.overview}
               </p>
