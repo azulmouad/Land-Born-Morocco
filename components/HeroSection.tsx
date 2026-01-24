@@ -42,7 +42,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-[70vh] md:h-[85vh] min-h-[500px] md:min-h-[600px] w-full overflow-hidden">
       {/* Slideshow Background */}
       <AnimatePresence mode="wait">
         <motion.div
