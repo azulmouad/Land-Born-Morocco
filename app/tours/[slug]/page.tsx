@@ -43,7 +43,7 @@ export default async function TourDetailsPage({
 
   return (
     <main className="bg-cream min-h-screen">
-      <Navbar />
+      <Navbar variant="opaque" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-24 md:pt-32 pb-12 md:pb-20">
         {/* Header Section */}
