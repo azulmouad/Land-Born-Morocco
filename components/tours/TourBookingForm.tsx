@@ -29,10 +29,10 @@ export default function TourBookingForm() {
   return (
     <div className="bg-white rounded-[2rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100/50 sticky top-24">
       <div className="mb-8">
-        <h3 className="text-2xl font-bold font-heading text-deep-blue mb-2">
+        <h3 className="text-xl md:text-2xl font-bold font-heading text-deep-blue mb-2">
           Book This Tour
         </h3>
-        <p className="text-gray-500 text-sm leading-relaxed">
+        <p className="text-xs md:text-sm text-gray-500 leading-relaxed">
           Ready for an unforgettable journey? Fill in your details and we'll
           arrange everything.
         </p>

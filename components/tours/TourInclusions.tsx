@@ -14,7 +14,7 @@ export default function TourInclusions({
       <div className="grid md:grid-cols-2 gap-8 md:gap-12">
         {/* Included */}
         <div>
-          <h3 className="text-xl font-heading font-bold text-deep-blue mb-4 flex items-center gap-2">
+          <h3 className="text-lg md:text-xl font-heading font-bold text-deep-blue mb-4 flex items-center gap-2">
             Included
           </h3>
           <ul className="space-y-3">
@@ -35,7 +35,7 @@ export default function TourInclusions({
 
         {/* Excluded */}
         <div>
-          <h3 className="text-xl font-heading font-bold text-deep-blue mb-4 flex items-center gap-2">
+          <h3 className="text-lg md:text-xl font-heading font-bold text-deep-blue mb-4 flex items-center gap-2">
             Not Included
           </h3>
           <ul className="space-y-3">

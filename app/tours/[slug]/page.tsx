@@ -52,10 +52,10 @@ export default async function TourDetailsPage({
         <div className="mb-6">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-4xl font-heading font-bold text-deep-blue mb-3">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-deep-blue mb-3">
                 {tour.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+              <div className="flex flex-wrap items-center gap-4 text-xs md:text-sm text-gray-600">
                 <div className="flex items-center gap-1">
                   <Star size={16} className="text-clay fill-clay" />
                   <span className="font-bold text-deep-blue">5.0</span>
@@ -98,11 +98,11 @@ export default async function TourDetailsPage({
                 languages={tour.languages}
                 type={tour.type}
               />
-              <h2 className="text-3xl font-heading font-bold text-deep-blue mb-6">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-deep-blue mb-6">
                 Overview
               </h2>
 
-              <p className="text-gray-600 leading-relaxed text-lg">
+              <p className="text-base md:text-lg text-gray-600 leading-relaxed">
                 {tour.overview}
               </p>
             </section>
@@ -122,7 +122,7 @@ export default async function TourDetailsPage({
 
             {/* Itinerary */}
             <section>
-              <h2 className="text-xl font-heading font-bold text-deep-blue mb-4 flex items-center gap-2">
+              <h2 className="text-lg md:text-xl font-heading font-bold text-deep-blue mb-4 flex items-center gap-2">
                 Itinerary
               </h2>
               <TourItinerary itinerary={tour.itinerary} />
@@ -131,10 +131,10 @@ export default async function TourDetailsPage({
             {/* Cancellation Policy */}
             {/* Cancellation Policy */}
             <section className="pt-8 border-t border-gray-100">
-              <h3 className="text-xl font-heading font-bold text-deep-blue mb-3">
+              <h3 className="text-lg md:text-xl font-heading font-bold text-deep-blue mb-3">
                 Cancellation Policy
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                 {tour.cancellationPolicy}
               </p>
             </section>
@@ -148,9 +148,14 @@ export default async function TourDetailsPage({
 
         {/* Related Tours */}
         <div className="mt-20 md:mt-32 border-t border-gray-200 pt-16">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-deep-blue mb-10 text-center">
-            You Might Also Like
-          </h2>
+          <div className="text-center mb-10">
+            <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">
+              More Adventures
+            </h2>
+            <h3 className="text-2xl md:text-3xl font-heading font-bold text-deep-blue">
+              You Might Also Like
+            </h3>
+          </div>
           <TourRelated />
         </div>
       </div>

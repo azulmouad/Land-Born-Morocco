@@ -26,7 +26,7 @@ export default function TourRelated() {
           </div>
 
           <div className="p-6">
-            <div className="flex items-center text-sm text-gray-500 mb-3 space-x-4">
+            <div className="flex items-center text-xs md:text-sm text-gray-500 mb-3 space-x-4">
               <div className="flex items-center">
                 <Clock size={16} className="text-sand mr-1" />
                 {tour.duration}
@@ -37,10 +37,12 @@ export default function TourRelated() {
               </div>
             </div>
 
-            <h4 className="text-xl font-bold text-deep-blue mb-2 font-heading group-hover:text-clay transition-colors">
+            <h4 className="text-xl md:text-2xl font-bold text-deep-blue mb-2 font-heading group-hover:text-clay transition-colors">
               {tour.title}
             </h4>
-            <p className="text-gray-600 mb-6 line-clamp-2">{tour.overview}</p>
+            <p className="text-sm md:text-base text-gray-600 mb-6 line-clamp-2">
+              {tour.overview}
+            </p>
 
             <Link
               href={`/tours/${tour.slug}`}

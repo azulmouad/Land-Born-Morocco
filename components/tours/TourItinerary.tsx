@@ -64,7 +64,7 @@ export default function TourItinerary({ itinerary }: TourItineraryProps) {
                 className="overflow-hidden"
               >
                 <div className="pt-2">
-                  <p className="text-gray-600 leading-relaxed text-sm">
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                     {day.description}
                   </p>
                 </div>

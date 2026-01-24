@@ -7,7 +7,7 @@ interface TourHighlightsProps {
 export default function TourHighlights({ highlights }: TourHighlightsProps) {
   return (
     <div className="mb-8">
-      <h3 className="text-xl font-heading font-bold text-deep-blue mb-4">
+      <h3 className="text-lg md:text-xl font-heading font-bold text-deep-blue mb-4">
         Tour Highlights
       </h3>
 
