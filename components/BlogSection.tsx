@@ -33,16 +33,16 @@ const videoBlogs = [
 
 export default function BlogSection() {
   return (
-    <section id="blog" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="text-center mb-16">
-          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2">Travel Journal</h2>
-          <h3 className="text-4xl md:text-5xl font-heading font-bold text-deep-blue">
+    <section id="blog" className="py-16 md:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 md:px-12">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">Travel Journal</h2>
+          <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue">
             Latest Stories
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {videoBlogs.map((post, index) => (
             <motion.div
               key={post.id}

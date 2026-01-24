@@ -30,7 +30,7 @@ export default function Navbar() {
   return (
     <nav
       className={clsx(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6 md:px-12",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 px-4 md:py-4 md:px-12",
         isScrolled
           ? "bg-white/95 backdrop-blur-md shadow-sm text-clay-dark"
           : "bg-transparent text-white"
@@ -38,7 +38,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold font-heading tracking-tight">
+        <Link href="/" className="text-xl md:text-2xl font-bold font-heading tracking-tight">
           LAND BORN <span className={isScrolled ? "text-sand" : "text-sand-light"}>MOROCCO</span>
         </Link>
 
@@ -83,14 +83,14 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg overflow-hidden"
+            className="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-xl shadow-lg overflow-hidden border-t border-gray-100"
           >
             <div className="flex flex-col p-6 space-y-4 text-center">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-gray-800 font-medium hover:text-clay transition-colors"
+                  className="text-gray-800 font-medium hover:text-clay transition-colors text-lg"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}

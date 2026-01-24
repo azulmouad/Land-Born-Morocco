@@ -57,14 +57,14 @@ const tours = [
 
 export default function ToursSection() {
   return (
-    <section id="tours" className="py-20 bg-cream">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="text-center mb-16">
-          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2">Discover Magic</h2>
-          <h3 className="text-4xl md:text-5xl font-heading font-bold text-deep-blue">Our Popular Tours</h3>
+    <section id="tours" className="py-16 md:py-20 bg-cream">
+      <div className="max-w-7xl mx-auto px-4 md:px-12">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">Discover Magic</h2>
+          <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue">Our Popular Tours</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {tours.map((tour, index) => (
             <motion.div
               key={tour.id}

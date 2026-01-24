@@ -31,11 +31,11 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-4xl mx-auto px-6 md:px-12">
-        <div className="text-center mb-16">
-          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2">Good to Know</h2>
-          <h3 className="text-4xl md:text-5xl font-heading font-bold text-deep-blue">
+    <section className="py-16 md:py-20 bg-white">
+      <div className="max-w-4xl mx-auto px-4 md:px-12">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">Good to Know</h2>
+          <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue">
             Frequently Asked Questions
           </h3>
         </div>

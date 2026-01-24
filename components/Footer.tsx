@@ -3,8 +3,8 @@ import { Facebook, Instagram, Twitter, Mail, Phone, MapPin } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer id="contact" className="bg-deep-blue text-white pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+    <footer id="contact" className="bg-deep-blue text-white pt-16 md:pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
         
         {/* Brand */}
         <div>

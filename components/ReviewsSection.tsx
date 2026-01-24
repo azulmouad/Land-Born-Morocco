@@ -29,14 +29,14 @@ const reviews = [
 
 export default function ReviewsSection() {
   return (
-    <section id="reviews" className="py-20 bg-cream">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
-        <h2 className="text-sand font-semibold uppercase tracking-widest mb-2">Testimonials</h2>
-        <h3 className="text-4xl md:text-5xl font-heading font-bold text-deep-blue mb-16">
+    <section id="reviews" className="py-16 md:py-20 bg-cream">
+      <div className="max-w-7xl mx-auto px-4 md:px-12 text-center">
+        <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">Testimonials</h2>
+        <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue mb-10 md:mb-16">
           What Our Guests Say
         </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {reviews.map((review, index) => (
             <motion.div
               key={review.id}

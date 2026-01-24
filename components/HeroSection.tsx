@@ -67,7 +67,7 @@ export default function HeroSection() {
       </AnimatePresence>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4 md:px-8">
         <motion.div
             key={`text-${currentSlide}`}
             initial={{ opacity: 0, y: 30 }}
@@ -75,13 +75,13 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-4xl"
         >
-          <h2 className="text-lg md:text-xl font-medium tracking-widest uppercase mb-4 text-sand-light">
+          <h2 className="text-sm md:text-xl font-medium tracking-widest uppercase mb-2 md:mb-4 text-sand-light">
             Welcome to Morocco
           </h2>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-6 drop-shadow-lg leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-bold mb-4 md:mb-6 drop-shadow-lg leading-tight">
             LAND BORN <br/> <span className="text-sand">MOROCCO</span>
           </h1>
-          <p className="text-lg md:text-2xl font-light mb-10 max-w-2xl mx-auto drop-shadow-md">
+          <p className="text-base sm:text-lg md:text-2xl font-light mb-8 md:mb-10 max-w-2xl mx-auto drop-shadow-md px-2">
             {slides[currentSlide].subtitle}
           </p>
           
@@ -91,7 +91,7 @@ export default function HeroSection() {
           >
             <a
               href="#tours"
-              className="inline-block px-8 py-4 bg-clay hover:bg-clay-dark text-white text-lg font-semibold rounded-full shadow-xl transition-all"
+              className="inline-block px-6 py-3 md:px-8 md:py-4 bg-clay hover:bg-clay-dark text-white text-base md:text-lg font-semibold rounded-full shadow-xl transition-all"
             >
               Discover Tours
             </a>
