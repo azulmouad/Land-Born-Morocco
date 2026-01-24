@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import TourOverview from "@/components/tours/TourOverview";
+import TourHighlights from "@/components/tours/TourHighlights";
 import TourGallery from "@/components/tours/TourGallery";
 import TourItinerary from "@/components/tours/TourItinerary";
 import TourBookingForm from "@/components/tours/TourBookingForm";
@@ -110,20 +111,8 @@ export default async function TourDetailsPage({
             </section>
 
             {/* Highlights */}
-            <section className="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm">
-              <h3 className="text-xl font-heading font-bold text-deep-blue mb-6">
-                Tour Highlights
-              </h3>
-              <ul className="grid md:grid-cols-2 gap-4">
-                {tour.highlights.map((highlight, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-sand/10 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check size={14} className="text-sand" />
-                    </div>
-                    <span className="text-gray-700">{highlight}</span>
-                  </li>
-                ))}
-              </ul>
+            <section>
+              <TourHighlights highlights={tour.highlights} />
             </section>
 
             {/* Itinerary */}
