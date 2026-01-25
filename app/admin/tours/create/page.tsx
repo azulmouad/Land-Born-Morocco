@@ -14,6 +14,7 @@ import {
   MapPin,
   List,
   Image as ImageIcon,
+  Globe,
 } from "lucide-react";
 
 interface ItineraryDay {
@@ -40,6 +41,9 @@ export default function CreateTourPage() {
     included: [] as string[],
     notIncluded: [] as string[],
     itinerary: [] as ItineraryDay[],
+    metaTitle: "",
+    metaDescription: "",
+    metaKeywords: "",
   });
 
   // Mock Options
@@ -120,15 +124,15 @@ export default function CreateTourPage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+    <div className="w-full mx-auto max-w-[1600px]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-800">Create New Tour</h1>
           <p className="text-slate-500 mt-1">
             Add a new travel experience for your customers
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 shrink-0">
           <AdminButton variant="outline" onClick={() => window.history.back()}>
             Cancel
           </AdminButton>
@@ -138,9 +142,9 @@ export default function CreateTourPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
         {/* Main Content */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="xl:col-span-2 space-y-6">
           {/* Basic Info */}
           <section className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
             <h2 className="text-lg font-semibold text-slate-800 flex items-center gap-2">
@@ -252,7 +256,7 @@ export default function CreateTourPage() {
                   key={index}
                   className="flex gap-4 p-4 bg-slate-50 rounded-lg border border-slate-100 relative group"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center font-bold text-lg">
+                  <div className="shrink-0 w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center font-bold text-lg">
                     {day.day}
                   </div>
                   <div className="flex-1 space-y-3">
@@ -359,7 +363,40 @@ export default function CreateTourPage() {
             </div>
           </section>
 
-          {/* Media - Moved to Main Section */}
+          {/* SEO Metadata */}
+          <section className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+            <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+              <Globe className="w-4 h-4 text-emerald-500" /> SEO Configuration
+            </h2>
+
+            <AdminInput
+              label="Meta Title"
+              name="metaTitle"
+              value={formData.metaTitle}
+              onChange={handleInputChange}
+              placeholder="SEO Title (defaults to tour title)"
+              helperText="Recommended length: 50-60 characters"
+            />
+
+            <AdminTextarea
+              label="Meta Description"
+              name="metaDescription"
+              value={formData.metaDescription}
+              onChange={handleInputChange}
+              placeholder="Brief summary for search engines..."
+              rows={3}
+              helperText="Recommended length: 150-160 characters"
+            />
+
+            <AdminInput
+              label="Keywords"
+              name="metaKeywords"
+              value={formData.metaKeywords}
+              onChange={handleInputChange}
+              placeholder="e.g., desert tour, sahara, camel trek"
+              helperText="Comma separated keywords"
+            />
+          </section>
         </div>
       </div>
     </div>
