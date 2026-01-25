@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
 const GALLERY_EVENTS = [
   {
     id: 1,
-    year: "2025",
+    year: "Jan 2025",
     title: "Sahara Desert Expedition",
     location: "Merzouga, Morocco",
     description:
@@ -51,7 +51,29 @@ const GALLERY_EVENTS = [
   },
   {
     id: 2,
-    year: "2024",
+    year: "Dec 2024",
+    title: "Coastal Essaouira Getaway",
+    location: "Essaouira, Morocco",
+    description:
+      "A relaxing weekend by the Atlantic coast, exploring the medina and enjoying fresh seafood.",
+    media: [
+      {
+        type: "image",
+        src: "/images/hero-3.png",
+        alt: "Coastal View",
+        size: "wide",
+      },
+      {
+        type: "image",
+        src: "/images/hero-1.png",
+        alt: "Medina Streets",
+        size: "small",
+      },
+    ],
+  },
+  {
+    id: 3,
+    year: "Nov 2024",
     title: "The Blue Pearl Adventures",
     location: "Chefchaouen, Morocco",
     description:
@@ -85,8 +107,42 @@ const GALLERY_EVENTS = [
     ],
   },
   {
-    id: 3,
-    year: "2023",
+    id: 4,
+    year: "Oct 2024",
+    title: "Marrakech Food Tour",
+    location: "Marrakech, Morocco",
+    description:
+      "Discovering the flavors of Morocco through street food and traditional dishes in the bustling souks.",
+    media: [
+      {
+        type: "image",
+        src: "/images/marrakech-square.png",
+        alt: "Jemaa el-Fnaa",
+        size: "tall",
+      },
+      {
+        type: "image",
+        src: "/images/hero-2.png",
+        alt: "Spice Market",
+        size: "small",
+      },
+      {
+        type: "image",
+        src: "/images/hero-1.png",
+        alt: "Tagine Cooking",
+        size: "small",
+      },
+      {
+        type: "image",
+        src: "/images/blog-1.png",
+        alt: "Mint Tea",
+        size: "wide",
+      },
+    ],
+  },
+  {
+    id: 5,
+    year: "Sep 2024",
     title: "High Atlas Trekking",
     location: "Toubkal National Park",
     description:
@@ -107,8 +163,36 @@ const GALLERY_EVENTS = [
     ],
   },
   {
-    id: 4,
-    year: "2022",
+    id: 6,
+    year: "Aug 2024",
+    title: "Ouzoud Waterfalls Day Trip",
+    location: "Ouzoud, Morocco",
+    description:
+      "A refreshing day trip to Morocco's most spectacular waterfalls, complete with rainbow views and playful monkeys.",
+    media: [
+      {
+        type: "image",
+        src: "/images/hero-1.png",
+        alt: "Waterfall View",
+        size: "large",
+      },
+      {
+        type: "image",
+        src: "/images/hero-2.png",
+        alt: "Rainbow Moment",
+        size: "small",
+      },
+      {
+        type: "image",
+        src: "/images/hero-3.png",
+        alt: "Boat Ride",
+        size: "small",
+      },
+    ],
+  },
+  {
+    id: 7,
+    year: "Jul 2024",
     title: "Imperial Cities Tour",
     location: "Fes & Meknes",
     description:
@@ -131,6 +215,28 @@ const GALLERY_EVENTS = [
         src: "/images/hero-1.png",
         alt: "Royal Palace Gate",
         size: "large",
+      },
+    ],
+  },
+  {
+    id: 8,
+    year: "Jun 2024",
+    title: "Agafay Desert Sunset",
+    location: "Agafay Desert, Morocco",
+    description:
+      "An evening in the rocky Agafay Desert with camel rides, traditional dinner, and stunning sunset views.",
+    media: [
+      {
+        type: "image",
+        src: "/images/hero-3.png",
+        alt: "Desert Sunset",
+        size: "wide",
+      },
+      {
+        type: "image",
+        src: "/images/hero-1.png",
+        alt: "Camel Silhouette",
+        size: "small",
       },
     ],
   },
@@ -245,19 +351,22 @@ export default function GalleryPage() {
                       {displayedMedia.map((item, mIndex) => {
                         const isLastItem = mIndex === 3;
                         const showOverlay = isLastItem && remainingCount > 0;
+                        const isTwoItemsOnly = displayedMedia.length === 2;
 
                         return (
                           <div
                             key={mIndex}
                             onClick={() => setSelectedMedia(item)}
                             className={`relative rounded-xl overflow-hidden shadow-md group cursor-pointer bg-gray-100 ${
-                              item.size === "large"
-                                ? "col-span-2 row-span-2 h-64 md:h-80"
-                                : item.size === "wide"
-                                  ? "col-span-2 h-40"
-                                  : item.size === "tall"
-                                    ? "row-span-2 h-full"
-                                    : "h-32 md:h-40"
+                              isTwoItemsOnly
+                                ? "col-span-2 h-48 md:h-56"
+                                : item.size === "large"
+                                  ? "col-span-2 row-span-2 h-64 md:h-80"
+                                  : item.size === "wide"
+                                    ? "col-span-2 h-40"
+                                    : item.size === "tall"
+                                      ? "row-span-2 h-full"
+                                      : "h-32 md:h-40"
                             }`}
                           >
                             <Image
