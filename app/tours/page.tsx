@@ -169,13 +169,25 @@ export default function ToursPage() {
       {/* Header */}
       {/* Header */}
       <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
-        <Image
-          src="/images/hero-1.png"
-          alt="Sahara Desert"
-          fill
-          className="object-cover"
-          priority
-        />
+        <motion.div
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.1 }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+          className="absolute inset-0"
+        >
+          <Image
+            src="/images/hero-1.png"
+            alt="Sahara Desert"
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-black/50" />
 
         <div className="max-w-[1600px] mx-auto text-center relative z-10 px-4">
