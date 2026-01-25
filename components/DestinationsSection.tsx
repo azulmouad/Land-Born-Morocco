@@ -71,9 +71,8 @@ export default function DestinationsSection() {
             >
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className="shrink-0 w-[85%] md:w-auto snap-center group relative h-64 md:h-80 rounded-2xl overflow-hidden cursor-pointer shadow-lg"
               >
                 <Image
