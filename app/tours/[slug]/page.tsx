@@ -9,6 +9,7 @@ import TourItinerary from "@/components/tours/TourItinerary";
 import TourBookingForm from "@/components/tours/TourBookingForm";
 import TourRelated from "@/components/tours/TourRelated";
 import TourStickyNav from "@/components/tours/TourStickyNav";
+import TourBottomBar from "@/components/tours/TourBottomBar";
 import { getTourBySlug } from "@/data/tours";
 import { Check, X, MapPin, Share2, Heart } from "lucide-react";
 
@@ -45,7 +46,7 @@ export default async function TourDetailsPage({
   }
 
   return (
-    <main className="bg-cream min-h-screen">
+    <main className="bg-cream min-h-screen pb-20 lg:pb-0">
       <Navbar variant="opaque" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 pt-24 md:pt-32 pb-12 md:pb-20">
@@ -132,7 +133,7 @@ export default async function TourDetailsPage({
           </div>
 
           {/* Right Column: Sticky Booking Form */}
-          <div id="booking" className="relative">
+          <div id="booking" className="relative hidden lg:block">
             <TourBookingForm />
           </div>
         </div>
@@ -150,6 +151,9 @@ export default async function TourDetailsPage({
           <TourRelated />
         </div>
       </div>
+
+      {/* Mobile Bottom Bar */}
+      <TourBottomBar />
 
       <Footer />
     </main>
