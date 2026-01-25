@@ -134,6 +134,14 @@ export default function ToursSection() {
           ))}
         </div>
       </div>
+      <div className="text-center mt-12">
+        <Link
+          href="/tours"
+          className="inline-block px-8 py-4 bg-transparent border-2 border-deep-blue text-deep-blue hover:bg-deep-blue hover:text-white rounded-full font-semibold transition-all shadow-sm hover:shadow-lg"
+        >
+          View All Tours
+        </Link>
+      </div>
     </section>
   );
 }
