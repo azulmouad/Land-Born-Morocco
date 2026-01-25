@@ -16,6 +16,7 @@ interface ImageUploadProps {
   accept?: string;
   error?: string;
   helperText?: string;
+  className?: string;
 }
 
 export default function ImageUpload({
@@ -27,6 +28,7 @@ export default function ImageUpload({
   accept = "image/*",
   error,
   helperText,
+  className = "",
 }: ImageUploadProps) {
   const [dragActive, setDragActive] = useState(false);
   const [previews, setPreviews] = useState<string[]>([]);
@@ -119,7 +121,7 @@ export default function ImageUpload({
   };
 
   return (
-    <div className="w-full">
+    <div className={`w-full ${className}`}>
       {label && (
         <label className="block text-sm font-medium text-slate-700 mb-1">
           {label}
