@@ -7,6 +7,7 @@ import AdminSelect from "@/components/admin/ui/AdminSelect";
 import AdminButton from "@/components/admin/ui/AdminButton";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
 import DynamicList from "@/components/admin/ui/DynamicList";
+import RichTextEditor from "@/components/admin/ui/RichTextEditor";
 import {
   Plus,
   Trash2,
@@ -157,13 +158,13 @@ export default function CreateTourPage() {
               onChange={handleInputChange}
               placeholder="e.g., Majestic Sahara 3 Day Tour"
             />
-            <AdminTextarea
+            <RichTextEditor
               label="Description"
-              name="description"
               value={formData.description}
-              onChange={handleInputChange}
+              onChange={(content) =>
+                setFormData((prev) => ({ ...prev, description: content }))
+              }
               placeholder="Detailed description of the tour..."
-              rows={5}
             />
             <div className="grid grid-cols-2 gap-4">
               <AdminInput
