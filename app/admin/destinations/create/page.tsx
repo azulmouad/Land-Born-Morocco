@@ -47,15 +47,15 @@ export default function CreateDestinationPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+    <div className="w-full mx-auto max-w-[1600px]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-800">Add Destination</h1>
           <p className="text-slate-500 mt-1">
             Create a new destination highlight for the platform
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 shrink-0">
           <AdminButton variant="outline" onClick={() => window.history.back()}>
             Cancel
           </AdminButton>
