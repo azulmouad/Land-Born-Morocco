@@ -9,13 +9,16 @@ import clsx from "clsx";
 interface TourFilterProps {
   categories: string[];
   tags: string[];
+  cities?: string[]; // New
   minPrice: number;
   maxPrice: number;
   selectedCategory: string | null;
   selectedTags: string[];
+  selectedCity?: string | null; // New
   priceRange: [number, number];
   onCategoryChange: (category: string | null) => void;
   onTagToggle: (tag: string) => void;
+  onCityChange?: (city: string | null) => void; // New
   onPriceChange: (range: [number, number]) => void;
   className?: string; // To allow external positioning
   isOpen?: boolean; // Mobile state
@@ -25,13 +28,16 @@ interface TourFilterProps {
 export default function TourFilter({
   categories,
   tags,
+  cities, // New
   minPrice,
   maxPrice,
   selectedCategory,
   selectedTags,
+  selectedCity, // New
   priceRange,
   onCategoryChange,
   onTagToggle,
+  onCityChange, // New
   onPriceChange,
   className,
   isOpen,
@@ -109,6 +115,65 @@ export default function TourFilter({
       </div>
 
       <hr className="border-gray-100" />
+
+      {/* Cities - New Section */}
+      {cities && onCityChange && (
+        <>
+          <div>
+            <h4 className="font-bold text-lg text-deep-blue mb-4 font-heading">
+              Cities / Regions
+            </h4>
+            <div className="space-y-3 max-h-60 overflow-y-auto scrollbar-hide">
+              <label className="flex items-center space-x-3 cursor-pointer group">
+                <input
+                  type="radio"
+                  name="city"
+                  className="peer sr-only"
+                  checked={selectedCity === null}
+                  onChange={() => onCityChange(null)}
+                />
+                <span className="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-clay peer-checked:bg-clay flex items-center justify-center transition-all">
+                  <span className="w-2.5 h-2.5 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-opacity" />
+                </span>
+                <span
+                  className={clsx(
+                    "text-gray-600 group-hover:text-clay transition-colors",
+                    selectedCity === null && "font-semibold text-clay",
+                  )}
+                >
+                  All Locations
+                </span>
+              </label>
+              {cities.map((city) => (
+                <label
+                  key={city}
+                  className="flex items-center space-x-3 cursor-pointer group"
+                >
+                  <input
+                    type="radio"
+                    name="city"
+                    className="peer sr-only"
+                    checked={selectedCity === city}
+                    onChange={() => onCityChange(city)}
+                  />
+                  <span className="w-5 h-5 rounded-full border-2 border-gray-300 peer-checked:border-clay peer-checked:bg-clay flex items-center justify-center transition-all">
+                    <span className="w-2.5 h-2.5 rounded-full bg-white opacity-0 peer-checked:opacity-100 transition-opacity" />
+                  </span>
+                  <span
+                    className={clsx(
+                      "text-gray-600 group-hover:text-clay transition-colors",
+                      selectedCity === city && "font-semibold text-clay",
+                    )}
+                  >
+                    {city}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <hr className="border-gray-100" />
+        </>
+      )}
 
       {/* Price Range */}
       <div>
