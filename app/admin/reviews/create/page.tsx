@@ -14,7 +14,6 @@ export default function CreateReviewPage() {
     name: "",
     rating: 5,
     text: "",
-    date: new Date().toISOString().split("T")[0],
     image: [] as (File | string)[],
     country: "",
   });
@@ -120,14 +119,6 @@ export default function CreateReviewPage() {
                 ))}
               </div>
             </div>
-
-            <AdminInput
-              label="Review Date"
-              name="date"
-              type="date"
-              value={formData.date}
-              onChange={handleInputChange}
-            />
           </div>
 
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 space-y-4">
