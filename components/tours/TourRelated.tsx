@@ -43,9 +43,12 @@ export default function TourRelated({ currentTourId }: TourRelatedProps) {
               </div>
             </div>
 
-            <h4 className="text-xl md:text-2xl font-bold text-deep-blue mb-2 font-heading group-hover:text-clay transition-colors">
+            <Link
+              href={`/tours/${tour.slug}`}
+              className="text-xl md:text-2xl font-bold text-deep-blue mb-2 font-heading group-hover:text-clay transition-colors block"
+            >
               {tour.title}
-            </h4>
+            </Link>
             <p className="text-sm md:text-base text-gray-600 mb-6 line-clamp-2">
               {tour.overview}
             </p>
