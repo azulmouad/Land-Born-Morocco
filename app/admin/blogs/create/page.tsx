@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import AdminInput from "@/components/admin/ui/AdminInput";
+import AdminTextarea from "@/components/admin/ui/AdminTextarea";
 import AdminSelect from "@/components/admin/ui/AdminSelect";
 import AdminButton from "@/components/admin/ui/AdminButton";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
 import RichTextEditor from "@/components/admin/ui/RichTextEditor";
-import { FileText } from "lucide-react";
+import { FileText, Globe } from "lucide-react";
 
 export default function CreateBlogPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +16,9 @@ export default function CreateBlogPage() {
     category: "",
     description: "", // HTML content from RTE
     image: [] as (File | string)[],
+    metaTitle: "",
+    metaDescription: "",
+    metaKeywords: "",
   });
 
   const categoryOptions = [
@@ -115,6 +119,37 @@ export default function CreateBlogPage() {
                 setFormData((prev) => ({ ...prev, image: files }))
               }
               maxFiles={1}
+            />
+          </div>
+
+          <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+            <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-2">
+              <Globe className="w-4 h-4 text-emerald-500" /> SEO Metadata
+            </h2>
+
+            <AdminInput
+              label="Meta Title"
+              name="metaTitle"
+              value={formData.metaTitle}
+              onChange={handleInputChange}
+              placeholder="SEO Title"
+            />
+
+            <AdminInput
+              label="Keywords"
+              name="metaKeywords"
+              value={formData.metaKeywords}
+              onChange={handleInputChange}
+              placeholder="comma, separated, keywords"
+            />
+
+            <AdminTextarea
+              label="Meta Description"
+              name="metaDescription"
+              value={formData.metaDescription}
+              onChange={handleInputChange}
+              placeholder="Brief summary for search engines..."
+              rows={3}
             />
           </div>
         </div>
