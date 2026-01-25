@@ -9,7 +9,8 @@ const videoBlogs = [
     id: 1,
     title: "How to Prepare for a Desert Trek",
     image: "/images/hero-1.png", // Reuse desert image
-    excerpt: "Everything you need to know about packing and preparing for your Sahara adventure.",
+    excerpt:
+      "Everything you need to know about packing and preparing for your Sahara adventure.",
     date: "Oct 12, 2025",
     author: "Omar",
   },
@@ -17,7 +18,8 @@ const videoBlogs = [
     id: 2,
     title: "The Magic of Moroccan Mint Tea",
     image: "/images/blog-1.png", // New tea image
-    excerpt: "Discover the tradition and culture behind Morocco's famous hospitality drink.",
+    excerpt:
+      "Discover the tradition and culture behind Morocco's famous hospitality drink.",
     date: "Sep 28, 2025",
     author: "Fatima",
   },
@@ -25,7 +27,8 @@ const videoBlogs = [
     id: 3,
     title: "Hidden Gems in Fez Medina",
     image: "/images/hero-2.png", // Reuse city image
-    excerpt: "Get lost in the world's largest car-free urban area and find the best spots.",
+    excerpt:
+      "Get lost in the world's largest car-free urban area and find the best spots.",
     date: "Sep 15, 2025",
     author: "Omar",
   },
@@ -36,7 +39,9 @@ export default function BlogSection() {
     <section id="blog" className="py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-12">
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">Travel Journal</h2>
+          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">
+            Travel Journal
+          </h2>
           <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue">
             Latest Stories
           </h3>
@@ -76,12 +81,14 @@ export default function BlogSection() {
               <h4 className="text-xl font-bold text-deep-blue mb-3 font-heading group-hover:text-clay transition-colors">
                 {post.title}
               </h4>
-              <p className="text-gray-600 mb-4 line-clamp-2">
-                {post.excerpt}
-              </p>
+              <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
 
               <button className="flex items-center text-clay font-semibold group-hover:underline">
-                Read More <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                Read More{" "}
+                <ArrowRight
+                  size={16}
+                  className="ml-2 group-hover:translate-x-1 transition-transform"
+                />
               </button>
             </motion.div>
           ))}

@@ -27,7 +27,7 @@ export default function TourGrid({ tours }: TourGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
       {tours.map((tour, index) => (
         <TourCard key={tour.id} tour={tour} index={index} />
       ))}

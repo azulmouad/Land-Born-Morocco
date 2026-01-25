@@ -47,8 +47,12 @@ export default function DestinationsSection() {
     <section id="destinations" className="py-16 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-12">
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">Explore</h2>
-          <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue">Top Destinations</h3>
+          <h2 className="text-sand font-semibold uppercase tracking-widest mb-2 text-sm md:text-base">
+            Explore
+          </h2>
+          <h3 className="text-3xl md:text-5xl font-heading font-bold text-deep-blue">
+            Top Destinations
+          </h3>
         </div>
 
         <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-8 md:pb-0 px-4 md:px-0 -mx-4 md:mx-0 snap-x snap-mandatory scrollbar-hide">
@@ -68,10 +72,14 @@ export default function DestinationsSection() {
                 className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-              
+
               <div className="absolute bottom-0 left-0 p-6">
-                <h4 className="text-2xl font-bold text-white font-heading mb-1">{dest.name}</h4>
-                <p className="text-white/90 text-sm font-medium">{dest.description}</p>
+                <h4 className="text-2xl font-bold text-white font-heading mb-1">
+                  {dest.name}
+                </h4>
+                <p className="text-white/90 text-sm font-medium">
+                  {dest.description}
+                </p>
               </div>
             </motion.div>
           ))}

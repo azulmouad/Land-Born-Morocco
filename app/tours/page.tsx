@@ -168,7 +168,7 @@ export default function ToursPage() {
       {/* Header */}
       <section className="bg-deep-blue text-white pt-32 pb-16 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/images/pattern-bg.png')] opacity-10"></div>
-        <div className="max-w-7xl mx-auto text-center relative z-10">
+        <div className="max-w-[1600px] mx-auto text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -189,7 +189,7 @@ export default function ToursPage() {
 
       {/* Content */}
       <section className="grow py-12 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1600px] mx-auto">
           {/* Mobile Filter Toggle */}
           <div className="md:hidden mb-6">
             <button
