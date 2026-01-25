@@ -6,7 +6,7 @@ import AdminTextarea from "@/components/admin/ui/AdminTextarea";
 import AdminSelect from "@/components/admin/ui/AdminSelect";
 import AdminButton from "@/components/admin/ui/AdminButton";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
-import { MapPin } from "lucide-react";
+import { MapPin, Globe } from "lucide-react";
 
 export default function CreateDestinationPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +15,9 @@ export default function CreateDestinationPage() {
     description: "",
     cities: [] as string[],
     image: [] as (File | string)[],
+    metaTitle: "",
+    metaDescription: "",
+    metaKeywords: "",
   });
 
   // Mock Options
@@ -103,6 +106,42 @@ export default function CreateDestinationPage() {
           onChange={handleInputChange}
           placeholder="Describe what makes this destination unique..."
           rows={5}
+        />
+      </div>
+
+      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6 mt-6">
+        <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+          <Globe className="w-4 h-4 text-emerald-500" /> SEO Configuration
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <AdminInput
+            label="Meta Title"
+            name="metaTitle"
+            value={formData.metaTitle}
+            onChange={handleInputChange}
+            placeholder="SEO Title (defaults to destination name)"
+            helperText="Recommended length: 50-60 characters"
+          />
+
+          <AdminInput
+            label="Keywords"
+            name="metaKeywords"
+            value={formData.metaKeywords}
+            onChange={handleInputChange}
+            placeholder="e.g., chefchaouen, blue city, morocco travel"
+            helperText="Comma separated keywords"
+          />
+        </div>
+
+        <AdminTextarea
+          label="Meta Description"
+          name="metaDescription"
+          value={formData.metaDescription}
+          onChange={handleInputChange}
+          placeholder="Brief summary for search engines..."
+          rows={3}
+          helperText="Recommended length: 150-160 characters"
         />
       </div>
     </div>
