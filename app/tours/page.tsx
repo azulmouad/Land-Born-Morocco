@@ -8,6 +8,7 @@ import { Filter } from "lucide-react";
 import TourFilter from "@/components/tours/TourFilter";
 import TourGrid from "@/components/tours/TourGrid";
 import Footer from "@/components/Footer";
+import PageHeader from "@/components/PageHeader";
 
 // Mock Data
 const ALL_TOURS = [
@@ -168,46 +169,11 @@ export default function ToursPage() {
 
       {/* Header */}
       {/* Header */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
-        <motion.div
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.1 }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="/images/hero-1.png"
-            alt="Sahara Desert"
-            fill
-            className="object-cover"
-            priority
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-black/50" />
-
-        <div className="max-w-7xl mx-auto text-center relative z-10 px-4">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-heading font-bold mb-4 text-white"
-          >
-            Explore Morocco
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto"
-          >
-            Find your perfect adventure among our curated selection of tours.
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader
+        image="/images/hero-1.png"
+        title="Explore Morocco"
+        subtitle="Find your perfect adventure among our curated selection of tours."
+      />
 
       {/* Content */}
       <section className="grow py-12 px-4 md:px-8">

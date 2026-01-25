@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import PageHeader from "@/components/PageHeader";
 
 export default function ContactPage() {
   return (
@@ -20,46 +21,11 @@ export default function ContactPage() {
       <Navbar />
 
       {/* Header */}
-      <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
-        <motion.div
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.1 }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0"
-        >
-          <Image
-            src="/images/hero-3.png" // Using Atlas Mountains image for variety
-            alt="Contact Us"
-            fill
-            className="object-cover"
-            priority
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-black/50" />
-
-        <div className="max-w-7xl mx-auto text-center relative z-10 px-4">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-heading font-bold mb-4 text-white"
-          >
-            Get in Touch
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto"
-          >
-            Start planning your dream Moroccan adventure today.
-          </motion.p>
-        </div>
-      </section>
+      <PageHeader
+        image="/images/hero-3.png"
+        title="Get in Touch"
+        subtitle="Start planning your dream Moroccan adventure today."
+      />
 
       {/* Contact Content */}
       <section className="py-16 md:py-24 px-4 md:px-12 grow">
