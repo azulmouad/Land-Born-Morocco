@@ -7,24 +7,32 @@ const sections = [
   { id: "highlights", label: "Highlights" },
   { id: "inclusions", label: "Includes/Excludes" },
   { id: "itinerary", label: "Itinerary" },
-  { id: "booking", label: "Booking" },
 ];
 
 export default function TourStickyNav() {
   const [activeSection, setActiveSection] = useState("overview");
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 140; // Account for navbar + sticky nav height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
+    if (sectionId === "overview") {
+      // Scroll to top of page for overview
       window.scrollTo({
-        top: offsetPosition,
+        top: 0,
         behavior: "smooth",
       });
       setActiveSection(sectionId);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offset = 140; // Account for navbar + sticky nav height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+        setActiveSection(sectionId);
+      }
     }
   };
 
