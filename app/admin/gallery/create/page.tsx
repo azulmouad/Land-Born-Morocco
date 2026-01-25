@@ -1,66 +1,115 @@
 "use client";
 
-import React from "react";
-import { Save, ChevronLeft, Upload, Image as ImageIcon } from "lucide-react";
-import Link from "next/link";
+import React, { useState } from "react";
+import AdminInput from "@/components/admin/ui/AdminInput";
+import AdminTextarea from "@/components/admin/ui/AdminTextarea";
+import AdminSelect from "@/components/admin/ui/AdminSelect";
+import AdminButton from "@/components/admin/ui/AdminButton";
+import ImageUpload from "@/components/admin/ui/ImageUpload";
+import { Camera } from "lucide-react";
 
 export default function CreateGalleryPage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    date: "",
+    description: "",
+    cities: [] as string[],
+    media: [] as (File | string)[],
+  });
+
+  const cityOptions = [
+    { value: "marrakech", label: "Marrakech" },
+    { value: "casablanca", label: "Casablanca" },
+    { value: "fes", label: "Fes" },
+    { value: "tangier", label: "Tangier" },
+    { value: "chefchaouen", label: "Chefchaouen" },
+    { value: "merzouga", label: "Merzouga" },
+  ];
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSelectChange = (name: string, value: string | string[]) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    console.log("Submitting Gallery Item:", formData);
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsLoading(false);
+    alert("Gallery item added successfully! (Mock)");
+  };
+
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <div className="flex items-center gap-4">
-        <Link
-          href="/admin/gallery"
-          className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-        >
-          <ChevronLeft className="w-6 h-6 text-gray-600" />
-        </Link>
+    <div className="max-w-3xl mx-auto">
+      <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Upload Image</h1>
+          <h1 className="text-3xl font-bold text-slate-800">Add to Gallery</h1>
+          <p className="text-slate-500 mt-1">Upload memories to the timeline</p>
+        </div>
+        <div className="flex gap-3">
+          <AdminButton variant="outline" onClick={() => window.history.back()}>
+            Cancel
+          </AdminButton>
+          <AdminButton onClick={handleSubmit} isLoading={isLoading}>
+            Upload Media
+          </AdminButton>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 space-y-8">
-        <div className="border-2 border-dashed border-gray-300 rounded-xl p-10 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer group">
-          <div className="w-16 h-16 bg-blue-50 text-blue-500 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <Upload className="w-8 h-8" />
-          </div>
-          <h3 className="text-lg font-medium text-gray-900">
-            Click to upload image
-          </h3>
-          <p className="text-gray-500 text-sm mt-1">
-            SVG, PNG, JPG or GIF (max. 3MB)
-          </p>
+      <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+        <ImageUpload
+          label="Media (Image or Video)"
+          value={formData.media}
+          onChange={(files) =>
+            setFormData((prev) => ({ ...prev, media: files }))
+          }
+          multiple
+          maxFiles={5}
+          helperText="Upload images or videos for this gallery entry"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <AdminInput
+            label="Full Title"
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+            placeholder="e.g., Sunset in Merzouga"
+          />
+          <AdminInput
+            label="Date"
+            name="date"
+            type="date"
+            value={formData.date}
+            onChange={handleInputChange}
+          />
         </div>
 
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
-              Title / Alt Text
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. Sahara Sunset"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
-              Category / Tag
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. Nature"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
-            />
-          </div>
-        </div>
+        <AdminSelect
+          label="Related Cities"
+          options={cityOptions}
+          value={formData.cities}
+          onChange={(val) => handleSelectChange("cities", val)}
+          multiple
+          placeholder="Select cities shown in media"
+        />
 
-        <div className="pt-4 flex justify-end">
-          <button className="flex items-center gap-2 px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors shadow-sm">
-            <Save className="w-4 h-4" />
-            Save Image
-          </button>
-        </div>
+        <AdminTextarea
+          label="Description"
+          name="description"
+          value={formData.description}
+          onChange={handleInputChange}
+          placeholder="Story behind this moment..."
+          rows={3}
+        />
       </div>
     </div>
   );
