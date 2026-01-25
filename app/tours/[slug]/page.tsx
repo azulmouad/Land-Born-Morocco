@@ -11,7 +11,7 @@ import TourRelated from "@/components/tours/TourRelated";
 import TourStickyNav from "@/components/tours/TourStickyNav";
 import TourBottomBar from "@/components/tours/TourBottomBar";
 import { getTourBySlug } from "@/data/tours";
-import { Check, X, MapPin, Share2, Heart } from "lucide-react";
+import { MapPin, Share2 } from "lucide-react";
 
 export async function generateMetadata({
   params,
@@ -56,7 +56,7 @@ export default async function TourDetailsPage({
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-heading font-bold text-deep-blue">
               {tour.title}
             </h1>
-            <button className="flex items-center gap-2 px-4 py-2 hover:bg-black/5 rounded-full transition-colors text-deep-blue font-medium text-sm flex-shrink-0">
+            <button className="flex items-center gap-2 px-4 py-2 hover:bg-black/5 rounded-full transition-colors text-deep-blue font-medium text-sm shrink-0">
               <Share2 size={18} />
               <span className="hidden md:inline">Share</span>
             </button>
@@ -148,7 +148,7 @@ export default async function TourDetailsPage({
               You Might Also Like
             </h3>
           </div>
-          <TourRelated />
+          <TourRelated currentTourId={tour.id} />
         </div>
       </div>
 

@@ -5,16 +5,22 @@ import Link from "next/link";
 import { Clock, Calendar } from "lucide-react";
 import { tours } from "@/data/tours";
 
-export default function TourRelated() {
-  // Just take the first 3 tours as "related" for now
-  const relatedTours = tours.slice(0, 3);
+interface TourRelatedProps {
+  currentTourId: number;
+}
+
+export default function TourRelated({ currentTourId }: TourRelatedProps) {
+  // Filter out the current tour and take the first 3 remaining tours
+  const relatedTours = tours
+    .filter((tour) => tour.id !== currentTourId)
+    .slice(0, 3);
 
   return (
-    <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+    <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 md:gap-8 pb-4 -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide">
       {relatedTours.map((tour) => (
         <div
           key={tour.id}
-          className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+          className="flex-shrink-0 w-[85%] md:w-auto snap-center group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
         >
           <div className="relative h-64 overflow-hidden">
             <Image
