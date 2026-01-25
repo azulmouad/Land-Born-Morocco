@@ -9,6 +9,7 @@ import clsx from "clsx";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Tours", href: "/tours" },
+  { name: "Destinations", href: "/destinations" },
   { name: "Gallery", href: "/gallery" },
   { name: "Blogs", href: "/blogs" },
 ];
