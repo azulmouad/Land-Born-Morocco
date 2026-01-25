@@ -190,7 +190,7 @@ export default function ToursPage() {
         </motion.div>
         <div className="absolute inset-0 bg-black/50" />
 
-        <div className="max-w-[1600px] mx-auto text-center relative z-10 px-4">
+        <div className="max-w-7xl mx-auto text-center relative z-10 px-4">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -211,7 +211,7 @@ export default function ToursPage() {
 
       {/* Content */}
       <section className="grow py-12 px-4 md:px-8">
-        <div className="max-w-[1600px] mx-auto">
+        <div className="max-w-7xl mx-auto">
           {/* Mobile Filter Toggle */}
           <div className="md:hidden mb-6">
             <button

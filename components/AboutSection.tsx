@@ -77,7 +77,7 @@ export default function AboutSection() {
           </div>
 
           <a
-            href="#contact"
+            href="/contact"
             className="inline-block px-8 py-3 bg-deep-blue text-white rounded-full font-semibold hover:bg-clay transition-all shadow-lg"
           >
             Plan My Trip with Omar
