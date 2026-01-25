@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Play, Calendar, MapPin } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Play, Calendar, MapPin, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -20,7 +21,7 @@ const GALLERY_EVENTS = [
         type: "image",
         src: "/images/hero-1.png",
         alt: "Camel Trek at Sunset",
-        size: "large",
+        size: "tall",
       },
       {
         type: "image",
@@ -34,6 +35,18 @@ const GALLERY_EVENTS = [
         alt: "Desert Dunes",
         size: "small",
       },
+      {
+        type: "image",
+        src: "/images/hero-1.png",
+        alt: "Nomad Tea",
+        size: "wide",
+      },
+      {
+        type: "image",
+        src: "/images/hero-2.png",
+        alt: "Starry Night",
+        size: "small",
+      }, // Extra Item
     ],
   },
   {
@@ -124,6 +137,12 @@ const GALLERY_EVENTS = [
 ];
 
 export default function GalleryPage() {
+  const [selectedMedia, setSelectedMedia] = useState<{
+    src: string;
+    type: string;
+    alt: string;
+  } | null>(null);
+
   return (
     <main className="bg-cream min-h-screen flex flex-col">
       <Navbar />
@@ -178,94 +197,161 @@ export default function GalleryPage() {
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 transform md:-translate-x-1/2" />
 
           <div className="space-y-20">
-            {GALLERY_EVENTS.map((event, index) => (
-              <motion.div
-                key={event.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                className={`relative flex flex-col md:flex-row gap-8 ${
-                  index % 2 === 0 ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-clay rounded-full border-4 border-white shadow-md top-0 transform -translate-x-1/2 md:translate-x-[-50%] z-10 box-content"></div>
+            {GALLERY_EVENTS.map((event, index) => {
+              const displayedMedia = event.media.slice(0, 4);
+              const remainingCount = event.media.length - 4;
 
-                {/* Content Side */}
-                <div
-                  className={`pl-12 md:pl-0 w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-12 text-left md:text-right" : "md:pl-12 text-left"}`}
+              return (
+                <motion.div
+                  key={event.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  className={`relative flex flex-col md:flex-row gap-8 ${
+                    index % 2 === 0 ? "md:flex-row-reverse" : ""
+                  }`}
                 >
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-sand/10 text-clay rounded-full text-sm font-bold mb-3">
-                    <Calendar size={14} />
-                    {event.year}
-                  </div>
-                  <h2 className="text-3xl font-heading font-bold text-deep-blue mb-2">
-                    {event.title}
-                  </h2>
+                  {/* Timeline Dot */}
+                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-clay rounded-full border-4 border-white shadow-md top-0 transform -translate-x-1/2 md:translate-x-[-50%] z-10 box-content"></div>
+
+                  {/* Content Side */}
                   <div
-                    className={`flex items-center text-gray-500 text-sm mb-4 ${index % 2 === 0 ? "md:justify-end" : ""}`}
+                    className={`pl-12 md:pl-0 w-full md:w-1/2 ${index % 2 === 0 ? "md:pr-12 text-left md:text-right" : "md:pl-12 text-left"}`}
                   >
-                    <MapPin size={16} className="mr-1" />
-                    {event.location}
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-sand/10 text-clay rounded-full text-sm font-bold mb-3">
+                      <Calendar size={14} />
+                      {event.year}
+                    </div>
+                    <h2 className="text-3xl font-heading font-bold text-deep-blue mb-2">
+                      {event.title}
+                    </h2>
+                    <div
+                      className={`flex items-center text-gray-500 text-sm mb-4 ${index % 2 === 0 ? "md:justify-end" : ""}`}
+                    >
+                      <MapPin size={16} className="mr-1" />
+                      {event.location}
+                    </div>
+                    <p className="text-gray-600 leading-relaxed mb-6">
+                      {event.description}
+                    </p>
                   </div>
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    {event.description}
-                  </p>
-                </div>
 
-                {/* Media Grid Side */}
-                <div
-                  className={`pl-12 md:pl-0 w-full md:w-1/2 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12"}`}
-                >
-                  <div className="grid grid-cols-2 gap-3">
-                    {event.media.map((item, mIndex) => (
-                      <div
-                        key={mIndex}
-                        className={`relative rounded-xl overflow-hidden shadow-md group cursor-pointer ${
-                          item.size === "large"
-                            ? "col-span-2 row-span-2 h-64 md:h-80"
-                            : item.size === "wide"
-                              ? "col-span-2 h-40"
-                              : item.size === "tall"
-                                ? "row-span-2 h-full"
-                                : "h-32 md:h-40"
-                        }`}
-                      >
-                        <Image
-                          src={
-                            item.type === "video"
-                              ? item.thumbnail || item.src
-                              : item.src
-                          }
-                          alt={item.alt}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                  {/* Media Grid Side */}
+                  <div
+                    className={`pl-12 md:pl-0 w-full md:w-1/2 ${index % 2 === 0 ? "md:pl-12" : "md:pr-12"}`}
+                  >
+                    <div className="grid grid-cols-2 gap-3">
+                      {displayedMedia.map((item, mIndex) => {
+                        const isLastItem = mIndex === 3;
+                        const showOverlay = isLastItem && remainingCount > 0;
 
-                        {item.type === "video" && (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-10 h-10 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg group-hover:bg-white/50 transition-colors">
-                              <Play
-                                size={16}
-                                className="text-white fill-current ml-1"
-                              />
-                            </div>
+                        return (
+                          <div
+                            key={mIndex}
+                            onClick={() => setSelectedMedia(item)}
+                            className={`relative rounded-xl overflow-hidden shadow-md group cursor-pointer bg-gray-100 ${
+                              item.size === "large"
+                                ? "col-span-2 row-span-2 h-64 md:h-80"
+                                : item.size === "wide"
+                                  ? "col-span-2 h-40"
+                                  : item.size === "tall"
+                                    ? "row-span-2 h-full"
+                                    : "h-32 md:h-40"
+                            }`}
+                          >
+                            <Image
+                              src={
+                                item.type === "video"
+                                  ? item.thumbnail || item.src
+                                  : item.src
+                              }
+                              alt={item.alt}
+                              fill
+                              className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+
+                            {item.type === "video" && !showOverlay && (
+                              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <div className="w-10 h-10 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg group-hover:bg-white/50 transition-colors">
+                                  <Play
+                                    size={16}
+                                    className="text-white fill-current ml-1"
+                                  />
+                                </div>
+                              </div>
+                            )}
+
+                            {showOverlay && (
+                              <div className="absolute inset-0 bg-black/60 flex items-center justify-center z-10 transition-colors hover:bg-black/70">
+                                <span className="text-white font-bold text-lg md:text-xl">
+                                  +{remainingCount} View All
+                                </span>
+                              </div>
+                            )}
                           </div>
-                        )}
-                      </div>
-                    ))}
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* End of Timeline Dot */}
           <div className="absolute left-4 md:left-1/2 bottom-0 w-3 h-3 bg-gray-300 rounded-full transform -translate-x-1/2" />
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedMedia && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedMedia(null)}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 md:p-8"
+          >
+            <button
+              onClick={() => setSelectedMedia(null)}
+              className="absolute top-4 right-4 text-white/70 hover:text-white transition-colors z-50"
+            >
+              <X size={32} />
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-5xl max-h-[85vh] aspect-video rounded-lg overflow-hidden shadow-2xl bg-black"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {selectedMedia.type === "video" ? (
+                <video
+                  src={selectedMedia.src}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <Image
+                  src={selectedMedia.src}
+                  alt={selectedMedia.alt}
+                  fill
+                  className="object-contain"
+                />
+              )}
+            </motion.div>
+
+            <div className="absolute bottom-8 left-0 right-0 text-center text-white/80 pointer-events-none">
+              <p className="text-lg font-medium">{selectedMedia.alt}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </main>
