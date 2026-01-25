@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Filter } from "lucide-react";
 import TourFilter from "@/components/tours/TourFilter";
@@ -163,16 +164,25 @@ export default function ToursPage() {
 
   return (
     <main className="bg-cream min-h-screen flex flex-col">
-      <Navbar variant="opaque" />
+      <Navbar />
 
       {/* Header */}
-      <section className="bg-deep-blue text-white pt-32 pb-16 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/pattern-bg.png')] opacity-10"></div>
-        <div className="max-w-[1600px] mx-auto text-center relative z-10">
+      {/* Header */}
+      <section className="relative h-[400px] flex items-center justify-center overflow-hidden">
+        <Image
+          src="/images/hero-1.png"
+          alt="Sahara Desert"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/50" />
+
+        <div className="max-w-[1600px] mx-auto text-center relative z-10 px-4">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-heading font-bold mb-4"
+            className="text-4xl md:text-6xl font-heading font-bold mb-4 text-white"
           >
             Explore Morocco
           </motion.h1>
@@ -180,7 +190,7 @@ export default function ToursPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto"
           >
             Find your perfect adventure among our curated selection of tours.
           </motion.p>

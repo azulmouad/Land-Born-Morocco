@@ -16,7 +16,7 @@ export default function AboutSection() {
           viewport={{ once: true }}
           className="w-full md:w-1/2 relative"
         >
-          <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+          <div className="relative aspect-4/5 rounded-3xl overflow-hidden shadow-2xl">
             <Image
               src="/images/omar-guide.png" // We will put the generated image here
               alt="Omar - Tour Guide"

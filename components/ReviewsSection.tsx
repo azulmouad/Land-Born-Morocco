@@ -161,7 +161,7 @@ export default function ReviewsSection() {
                       ))}
                     </div>
 
-                    <p className="text-gray-600 mb-6 italic leading-relaxed flex-grow text-sm md:text-base">
+                    <p className="text-gray-600 mb-6 italic leading-relaxed grow text-sm md:text-base">
                       &quot;{review.text}&quot;
                     </p>
 
