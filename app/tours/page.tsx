@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from "react";
 import Navbar from "@/components/Navbar";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Filter } from "lucide-react";
 import TourFilter from "@/components/tours/TourFilter";
@@ -177,7 +176,7 @@ export default function ToursPage() {
 
       {/* Content */}
       <section className="grow py-12 px-4 md:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           {/* Mobile Filter Toggle */}
           <div className="md:hidden mb-6">
             <button
