@@ -48,71 +48,78 @@ export default function BlogDetailsPage() {
         style={{ scaleX }}
       />
 
-      <article className="grow pt-24 md:pt-32 pb-16">
-        {/* Article Header */}
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="flex items-center justify-center gap-2 mb-6">
-              <span className="px-4 py-1.5 bg-sand/10 text-clay-dark text-xs font-bold uppercase tracking-widest rounded-full">
-                {post.category}
-              </span>
-              <span className="w-1 h-1 bg-gray-300 rounded-full" />
-              <span className="text-gray-500 text-sm font-medium">
-                {post.readTime}
-              </span>
-            </div>
-
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-deep-blue mb-8 leading-[1.15]">
-              {post.title}
-            </h1>
-
-            <div className="flex items-center justify-center gap-8 text-sm font-medium text-gray-500 border-b border-gray-100 pb-8 mb-8">
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
-                  <User size={20} />
-                </div>
-                <div className="text-left">
-                  <p className="text-deep-blue text-xs font-bold uppercase tracking-wider">
-                    Written by
-                  </p>
-                  <p>{post.author}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-400">
-                  <Calendar size={20} />
-                </div>
-                <div className="text-left">
-                  <p className="text-deep-blue text-xs font-bold uppercase tracking-wider">
-                    Published on
-                  </p>
-                  <p>{post.date}</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Hero Image */}
-        <div className="max-w-6xl mx-auto px-4 mb-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full aspect-[21/9] rounded-3xl overflow-hidden shadow-xl"
-          >
+      <article className="grow pb-16">
+        {/* Full Screen Hero Section */}
+        <div className="relative w-full h-[75vh] min-h-[600px] mb-16">
+          <div className="absolute inset-0 bg-gray-900 z-0">
             <Image
               src={post.image}
               alt={post.title}
               fill
-              className="object-cover"
+              className="object-cover opacity-90"
               priority
             />
-          </motion.div>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60" />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
+
+          <div className="absolute inset-0 z-10 flex items-center justify-center">
+            <div className="max-w-5xl mx-auto px-4 text-center mt-20">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="flex items-center justify-center gap-3 mb-8">
+                  <span className="px-5 py-2 bg-white/20 backdrop-blur-md text-white border border-white/20 text-xs font-bold uppercase tracking-widest rounded-full">
+                    {post.category}
+                  </span>
+                  <span className="w-1.5 h-1.5 bg-white/60 rounded-full" />
+                  <span className="text-white/90 text-sm font-medium flex items-center gap-2">
+                    <Clock size={16} />
+                    {post.readTime}
+                  </span>
+                </div>
+
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-10 leading-[1.1] drop-shadow-lg max-w-4xl mx-auto">
+                  {post.title}
+                </h1>
+
+                <div className="inline-flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 text-white/90 border-t border-white/20 pt-8 mx-auto min-w-[300px]">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20">
+                      <User size={20} className="text-white" />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-white/60 text-[10px] font-bold uppercase tracking-wider mb-0.5">
+                        Written by
+                      </p>
+                      <p className="font-semibold text-lg leading-none">
+                        {post.author}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="hidden md:block w-px h-10 bg-white/20" />
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/20">
+                      <Calendar size={20} className="text-white" />
+                    </div>
+                    <div className="text-left">
+                      <p className="text-white/60 text-[10px] font-bold uppercase tracking-wider mb-0.5">
+                        Published on
+                      </p>
+                      <p className="font-semibold text-lg leading-none">
+                        {post.date}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
 
         {/* Main Content Layout */}
