@@ -7,6 +7,7 @@ import AdminInput from "@/components/admin/ui/AdminInput";
 import AdminTextarea from "@/components/admin/ui/AdminTextarea";
 import AdminButton from "@/components/admin/ui/AdminButton";
 import ImageUpload from "@/components/admin/ui/ImageUpload";
+import RichTextEditor from "@/components/admin/ui/RichTextEditor";
 
 export default function CreateReviewPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -86,13 +87,13 @@ export default function CreateReviewPage() {
               />
             </div>
 
-            <AdminTextarea
+            <RichTextEditor
               label="Review Text"
-              name="text"
               value={formData.text}
-              onChange={handleInputChange}
+              onChange={(content) =>
+                setFormData((prev) => ({ ...prev, text: content }))
+              }
               placeholder="Paste the client's feedback here..."
-              rows={6}
             />
           </div>
         </div>
