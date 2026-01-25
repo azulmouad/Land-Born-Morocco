@@ -58,7 +58,7 @@ export default function FAQPage() {
                   </div>
                 </div>
 
-                <div className="flex gap-2 flex-shrink-0">
+                <div className="flex gap-2 shrink-0">
                   <button className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                     <Edit2 className="w-4 h-4" />
                   </button>

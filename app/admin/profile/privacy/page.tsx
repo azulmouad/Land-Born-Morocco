@@ -6,7 +6,7 @@ import { Save } from "lucide-react";
 export default function PrivacyProfilePage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6 h-[calc(100vh-8rem)] flex flex-col">
-      <div className="flex-shrink-0">
+      <div className="shrink-0">
         <h1 className="text-3xl font-bold text-gray-900">Privacy Policy</h1>
         <p className="text-gray-500 mt-1">
           Update your terms and privacy statement

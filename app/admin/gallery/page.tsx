@@ -37,7 +37,7 @@ export default function GalleryPage() {
               fill
               className="object-cover group-hover:scale-110 transition-transform duration-500"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+            <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-black/70 to-transparent p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
               <p className="text-white text-sm font-medium truncate">
                 {img.title}
               </p>
