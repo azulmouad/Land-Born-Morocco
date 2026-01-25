@@ -9,9 +9,8 @@ import clsx from "clsx";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Tours", href: "/tours" },
-  { name: "About", href: "#about" },
-  { name: "Reviews", href: "#reviews" },
-  { name: "Contact", href: "#contact" },
+  { name: "Blogs", href: "/blogs" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar({
@@ -71,7 +70,7 @@ export default function Navbar({
             </Link>
           ))}
           <Link
-            href="#contact"
+            href="/contact"
             className={clsx(
               "px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-md hover:shadow-lg",
               showOpaque
@@ -113,7 +112,7 @@ export default function Navbar({
                 </Link>
               ))}
               <Link
-                href="#contact"
+                href="/contact"
                 className="inline-block px-6 py-3 rounded-full bg-clay text-white font-semibold shadow-md hover:bg-clay-dark transition-all"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
