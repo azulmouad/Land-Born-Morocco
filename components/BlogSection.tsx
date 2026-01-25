@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, User } from "lucide-react";
 
@@ -49,47 +50,50 @@ export default function BlogSection() {
 
         <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 md:gap-8 pb-8 md:pb-0 px-4 md:px-0 -mx-4 md:mx-0 snap-x snap-mandatory scrollbar-hide">
           {videoBlogs.map((post, index) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="flex-shrink-0 w-[85%] md:w-auto snap-center group cursor-pointer"
-            >
-              <div className="relative h-64 rounded-2xl overflow-hidden mb-6">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
-              </div>
-
-              <div className="flex items-center text-sm text-gray-400 mb-3 space-x-4">
-                <div className="flex items-center">
-                  <Calendar size={14} className="mr-1" />
-                  {post.date}
+            <Link key={post.id} href={`/blogs/`} className="contents">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex-shrink-0 w-[85%] md:w-auto snap-center group cursor-pointer"
+              >
+                <div className="relative h-64 rounded-2xl overflow-hidden mb-6">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors" />
                 </div>
-                <div className="flex items-center">
-                  <User size={14} className="mr-1" />
-                  {post.author}
+
+                <div className="flex items-center text-sm text-gray-400 mb-3 space-x-4">
+                  <div className="flex items-center">
+                    <Calendar size={14} className="mr-1" />
+                    {post.date}
+                  </div>
+                  <div className="flex items-center">
+                    <User size={14} className="mr-1" />
+                    {post.author}
+                  </div>
                 </div>
-              </div>
 
-              <h4 className="text-xl font-bold text-deep-blue mb-3 font-heading group-hover:text-clay transition-colors">
-                {post.title}
-              </h4>
-              <p className="text-gray-600 mb-4 line-clamp-2">{post.excerpt}</p>
+                <h4 className="text-xl font-bold text-deep-blue mb-3 font-heading group-hover:text-clay transition-colors">
+                  {post.title}
+                </h4>
+                <p className="text-gray-600 mb-4 line-clamp-2">
+                  {post.excerpt}
+                </p>
 
-              <button className="flex items-center text-clay font-semibold group-hover:underline">
-                Read More{" "}
-                <ArrowRight
-                  size={16}
-                  className="ml-2 group-hover:translate-x-1 transition-transform"
-                />
-              </button>
-            </motion.div>
+                <div className="flex items-center text-clay font-semibold group-hover:underline">
+                  Read More{" "}
+                  <ArrowRight
+                    size={16}
+                    className="ml-2 group-hover:translate-x-1 transition-transform"
+                  />
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </div>
