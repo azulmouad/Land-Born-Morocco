@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Clock, DollarSign, Calendar } from "lucide-react";
+import { Clock, Calendar } from "lucide-react";
 
 const tours = [
   {
@@ -99,9 +99,6 @@ export default function ToursSection() {
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-clay font-bold text-sm shadow-sm flex items-center">
-                  <DollarSign size={14} className="mr-1" /> From ${tour.price}
-                </div>
               </div>
 
               <div className="p-6">
