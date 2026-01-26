@@ -1,12 +1,40 @@
-import React from "react";
-import { Eye, Trash2, Search, Download } from "lucide-react";
+"use client";
+
+import React, { useState } from "react";
+import {
+  Eye,
+  Trash2,
+  Search,
+  Download,
+  X,
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Calendar,
+  DollarSign,
+  Map,
+} from "lucide-react";
 
 // Mock Data
-const bookings = [
+interface Booking {
+  id: string;
+  client: string;
+  email: string;
+  phone: string;
+  country: string;
+  tour: string;
+  date: string;
+  amount: string;
+}
+
+const bookings: Booking[] = [
   {
     id: "#BK-7890",
     client: "John Doe",
     email: "john@example.com",
+    phone: "+1 555 123 4567",
+    country: "USA",
     tour: "The Golden Desert Trek",
     date: "2025-11-15",
     amount: "$350",
@@ -15,6 +43,8 @@ const bookings = [
     id: "#BK-7891",
     client: "Sarah Smith",
     email: "sarah@example.com",
+    phone: "+44 20 7946 0958",
+    country: "UK",
     tour: "Imperial Cities Tour",
     date: "2025-12-01",
     amount: "$550",
@@ -23,6 +53,8 @@ const bookings = [
     id: "#BK-7892",
     client: "Michael Brown",
     email: "michael@example.com",
+    phone: "+49 30 12345678",
+    country: "Germany",
     tour: "Atlas Mountains Escape",
     date: "2025-10-20",
     amount: "$150",
@@ -31,6 +63,8 @@ const bookings = [
     id: "#BK-7893",
     client: "Emily Davis",
     email: "emily@example.com",
+    phone: "+33 1 23 45 67 89",
+    country: "France",
     tour: "The Golden Desert Trek",
     date: "2026-01-05",
     amount: "$350",
@@ -39,6 +73,8 @@ const bookings = [
     id: "#BK-7894",
     client: "David Wilson",
     email: "david@example.com",
+    phone: "+61 2 1234 5678",
+    country: "Australia",
     tour: "Imperial Cities Tour",
     date: "2026-02-14",
     amount: "$1100",
@@ -46,6 +82,8 @@ const bookings = [
 ];
 
 export default function BookingsPage() {
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -117,7 +155,7 @@ export default function BookingsPage() {
                         {booking.client}
                       </span>
                       <span className="text-xs text-gray-500">
-                        {booking.email}
+                        {booking.country}
                       </span>
                     </div>
                   </td>
@@ -133,6 +171,7 @@ export default function BookingsPage() {
                   <td className="py-4 px-6 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <button
+                        onClick={() => setSelectedBooking(booking)}
                         className="p-2 text-gray-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                         title="View Details"
                       >
@@ -173,6 +212,149 @@ export default function BookingsPage() {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedBooking && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-gray-100">
+              <div>
+                <h2 className="text-xl font-bold text-gray-900">
+                  Booking Details
+                </h2>
+                <p className="text-sm text-gray-500">{selectedBooking.id}</p>
+              </div>
+              <button
+                onClick={() => setSelectedBooking(null)}
+                className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-emerald-50 rounded-lg">
+                    <User className="w-4 h-4 text-emerald-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">
+                      Client
+                    </p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {selectedBooking.client}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-blue-50 rounded-lg">
+                    <MapPin className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">
+                      Country
+                    </p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {selectedBooking.country}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-purple-50 rounded-lg">
+                    <Mail className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">
+                      Email
+                    </p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {selectedBooking.email}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-orange-50 rounded-lg">
+                    <Phone className="w-4 h-4 text-orange-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">
+                      Phone
+                    </p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {selectedBooking.phone}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="border-t border-gray-100 pt-4 space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="p-2 bg-amber-50 rounded-lg">
+                    <Map className="w-4 h-4 text-amber-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500 uppercase tracking-wider">
+                      Tour
+                    </p>
+                    <p className="text-sm font-medium text-gray-900">
+                      {selectedBooking.tour}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-pink-50 rounded-lg">
+                      <Calendar className="w-4 h-4 text-pink-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wider">
+                        Date
+                      </p>
+                      <p className="text-sm font-medium text-gray-900">
+                        {selectedBooking.date}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="p-2 bg-green-50 rounded-lg">
+                      <DollarSign className="w-4 h-4 text-green-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wider">
+                        Amount
+                      </p>
+                      <p className="text-sm font-medium text-gray-900">
+                        {selectedBooking.amount}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex justify-end gap-3 p-6 border-t border-gray-100 bg-gray-50/50">
+              <button
+                onClick={() => setSelectedBooking(null)}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              >
+                Close
+              </button>
+              <button className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
+                Delete Booking
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
