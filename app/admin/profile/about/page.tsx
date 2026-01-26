@@ -11,9 +11,7 @@ import { User, Award } from "lucide-react";
 export default function AboutProfilePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: "Omar",
-    lastName: "Ouahid",
-    jobTitle: "Senior Tour Guide & Founder",
+    fullName: "Omar Ouahid",
     experience: "10+ Years",
     bio: "Passionate tour guide with over 10 years of experience showing travelers the beauty of Morocco...",
     image: [] as (File | string)[],
@@ -68,25 +66,11 @@ export default function AboutProfilePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <AdminInput
-                label="First Name"
-                name="firstName"
-                value={formData.firstName}
+                label="Full Name"
+                name="fullName"
+                value={formData.fullName}
                 onChange={handleInputChange}
-              />
-              <AdminInput
-                label="Last Name"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <AdminInput
-                label="Job Title"
-                name="jobTitle"
-                value={formData.jobTitle}
-                onChange={handleInputChange}
+                placeholder="e.g. Omar Ouahid"
               />
               <AdminInput
                 label="Experience"
