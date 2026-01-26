@@ -14,6 +14,9 @@ import {
   Calendar,
   DollarSign,
   Map,
+  CheckCircle,
+  Clock,
+  XCircle,
 } from "lucide-react";
 
 // Mock Data
@@ -26,7 +29,21 @@ interface Booking {
   tour: string;
   date: string;
   amount: string;
+  status: "Confirmed" | "Not Answered" | "Canceled";
 }
+
+const statusConfig: Record<
+  Booking["status"],
+  { color: string; icon: typeof CheckCircle; bg: string }
+> = {
+  Confirmed: {
+    color: "text-emerald-700",
+    bg: "bg-emerald-100",
+    icon: CheckCircle,
+  },
+  "Not Answered": { color: "text-amber-700", bg: "bg-amber-100", icon: Clock },
+  Canceled: { color: "text-red-700", bg: "bg-red-100", icon: XCircle },
+};
 
 const bookings: Booking[] = [
   {
@@ -38,6 +55,7 @@ const bookings: Booking[] = [
     tour: "The Golden Desert Trek",
     date: "2025-11-15",
     amount: "$350",
+    status: "Not Answered",
   },
   {
     id: "#BK-7891",
@@ -48,6 +66,7 @@ const bookings: Booking[] = [
     tour: "Imperial Cities Tour",
     date: "2025-12-01",
     amount: "$550",
+    status: "Confirmed",
   },
   {
     id: "#BK-7892",
@@ -58,6 +77,7 @@ const bookings: Booking[] = [
     tour: "Atlas Mountains Escape",
     date: "2025-10-20",
     amount: "$150",
+    status: "Confirmed",
   },
   {
     id: "#BK-7893",
@@ -68,6 +88,7 @@ const bookings: Booking[] = [
     tour: "The Golden Desert Trek",
     date: "2026-01-05",
     amount: "$350",
+    status: "Canceled",
   },
   {
     id: "#BK-7894",
@@ -78,6 +99,7 @@ const bookings: Booking[] = [
     tour: "Imperial Cities Tour",
     date: "2026-02-14",
     amount: "$1100",
+    status: "Not Answered",
   },
 ];
 
@@ -135,6 +157,9 @@ export default function BookingsPage() {
                 <th className="py-4 px-6 text-sm font-semibold text-gray-600">
                   Amount
                 </th>
+                <th className="py-4 px-6 text-sm font-semibold text-gray-600">
+                  Status
+                </th>
                 <th className="py-4 px-6 text-sm font-semibold text-gray-600 text-right">
                   Actions
                 </th>
@@ -167,6 +192,20 @@ export default function BookingsPage() {
                   </td>
                   <td className="py-4 px-6 text-sm font-medium text-gray-900">
                     {booking.amount}
+                  </td>
+                  <td className="py-4 px-6">
+                    {(() => {
+                      const config = statusConfig[booking.status];
+                      const StatusIcon = config.icon;
+                      return (
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${config.bg} ${config.color}`}
+                        >
+                          <StatusIcon className="w-3 h-3" />
+                          {booking.status}
+                        </span>
+                      );
+                    })()}
                   </td>
                   <td className="py-4 px-6 text-right">
                     <div className="flex items-center justify-end gap-2">
@@ -336,6 +375,25 @@ export default function BookingsPage() {
                       </p>
                     </div>
                   </div>
+                </div>
+
+                {/* Status */}
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">
+                    Status
+                  </p>
+                  {(() => {
+                    const config = statusConfig[selectedBooking.status];
+                    const StatusIcon = config.icon;
+                    return (
+                      <span
+                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${config.bg} ${config.color}`}
+                      >
+                        <StatusIcon className="w-4 h-4" />
+                        {selectedBooking.status}
+                      </span>
+                    );
+                  })()}
                 </div>
               </div>
             </div>
