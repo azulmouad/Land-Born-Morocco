@@ -1,69 +1,88 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Save, MapPin, Phone, Mail } from "lucide-react";
+import AdminInput from "@/components/admin/ui/AdminInput";
+import AdminTextarea from "@/components/admin/ui/AdminTextarea";
+import AdminButton from "@/components/admin/ui/AdminButton";
 
 export default function ContactProfilePage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "contact@landbord.com",
+    phone: "+212 6 00 00 00 00",
+    address: "Merzouga, Morocco",
+    mapEmbed: "https://www.google.com/maps/embed?...",
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    console.log("Saving contact info:", formData);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsLoading(false);
+    alert("Contact info saved! (Mock)");
+  };
+
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">Contact Info</h1>
-        <p className="text-gray-500 mt-1">Manage public contact details</p>
+    <div className="w-full mx-auto max-w-[1600px] space-y-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Contact Info</h1>
+          <p className="text-gray-500 mt-1">Manage public contact details</p>
+        </div>
+        <AdminButton
+          onClick={handleSubmit}
+          isLoading={isLoading}
+          className="shrink-0"
+        >
+          <Save className="w-4 h-4 mr-2" />
+          Save Changes
+        </AdminButton>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 space-y-8">
-        <div className="grid gap-6">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-              <Mail className="w-4 h-4 text-emerald-500" /> Email Address
-            </label>
-            <input
-              type="email"
-              defaultValue="contact@landbord.com"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
-            />
-          </div>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <AdminInput
+            label="Email Address"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            placeholder="contact@example.com"
+          />
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-              <Phone className="w-4 h-4 text-emerald-500" /> Phone Number
-            </label>
-            <input
-              type="text"
-              defaultValue="+212 6 00 00 00 00"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-emerald-500" /> Address / Location
-            </label>
-            <input
-              type="text"
-              defaultValue="Merzouga, Morocco"
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700">
-              Google Maps Embed Link
-            </label>
-            <textarea
-              rows={3}
-              defaultValue="https://www.google.com/maps/embed?..."
-              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono text-xs text-gray-600"
-            />
-          </div>
+          <AdminInput
+            label="Phone Number"
+            name="phone"
+            value={formData.phone}
+            onChange={handleInputChange}
+            placeholder="+212 6 00 00 00 00"
+          />
         </div>
 
-        <div className="pt-4 flex justify-end">
-          <button className="flex items-center gap-2 px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors shadow-sm">
-            <Save className="w-4 h-4" />
-            Save Changes
-          </button>
-        </div>
+        <AdminInput
+          label="Address / Location"
+          name="address"
+          value={formData.address}
+          onChange={handleInputChange}
+          placeholder="City, Country"
+        />
+
+        <AdminTextarea
+          label="Google Maps Embed Link"
+          name="mapEmbed"
+          value={formData.mapEmbed}
+          onChange={handleInputChange}
+          rows={3}
+          helperText="Paste your Google Maps embed URL here"
+        />
       </div>
     </div>
   );

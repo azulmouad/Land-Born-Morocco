@@ -1,32 +1,53 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Save } from "lucide-react";
+import AdminButton from "@/components/admin/ui/AdminButton";
+import RichTextEditor from "@/components/admin/ui/RichTextEditor";
 
 export default function PrivacyProfilePage() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [content, setContent] = useState(`<h1>Privacy Policy</h1>
+<p>Last updated: January 2026</p>
+<h2>1. Introduction</h2>
+<p>Welcome to LandBord Morocco. We value your privacy and are committed to protecting your personal data...</p>
+<h2>2. Data We Collect</h2>
+<p>We may collect personal identification information from Users...</p>`);
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    console.log("Saving privacy policy:", content);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsLoading(false);
+    alert("Privacy policy saved! (Mock)");
+  };
+
   return (
-    <div className="max-w-4xl mx-auto space-y-6 h-[calc(100vh-8rem)] flex flex-col">
-      <div className="shrink-0">
-        <h1 className="text-3xl font-bold text-gray-900">Privacy Policy</h1>
-        <p className="text-gray-500 mt-1">
-          Update your terms and privacy statement
-        </p>
+    <div className="w-full mx-auto max-w-[1600px] space-y-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">Privacy Policy</h1>
+          <p className="text-gray-500 mt-1">
+            Update your terms and privacy statement
+          </p>
+        </div>
+        <AdminButton
+          onClick={handleSubmit}
+          isLoading={isLoading}
+          className="shrink-0"
+        >
+          <Save className="w-4 h-4 mr-2" />
+          Save Policy
+        </AdminButton>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 flex-1 flex flex-col p-6">
-        <div className="flex-1">
-          <textarea
-            className="w-full h-full p-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 resize-none font-mono text-sm leading-relaxed"
-            defaultValue={`# Privacy Policy\n\nLast updated: January 2026\n\n## 1. Introduction\n\nWelcome to LandBord Morocco. We value your privacy and are committed to protecting your personal data...\n\n## 2. Data We Collect\n\nWe may collect personal identification information from Users...`}
-          />
-        </div>
-
-        <div className="pt-6 flex justify-end">
-          <button className="flex items-center gap-2 px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors shadow-sm">
-            <Save className="w-4 h-4" />
-            Save Policy
-          </button>
-        </div>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <RichTextEditor
+          label="Privacy Policy Content"
+          value={content}
+          onChange={setContent}
+          placeholder="Write your privacy policy here..."
+        />
       </div>
     </div>
   );
