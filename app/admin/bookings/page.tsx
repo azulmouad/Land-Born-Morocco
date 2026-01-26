@@ -9,7 +9,6 @@ const bookings = [
     email: "john@example.com",
     tour: "The Golden Desert Trek",
     date: "2025-11-15",
-    status: "Pending",
     amount: "$350",
   },
   {
@@ -18,7 +17,6 @@ const bookings = [
     email: "sarah@example.com",
     tour: "Imperial Cities Tour",
     date: "2025-12-01",
-    status: "Confirmed",
     amount: "$550",
   },
   {
@@ -27,7 +25,6 @@ const bookings = [
     email: "michael@example.com",
     tour: "Atlas Mountains Escape",
     date: "2025-10-20",
-    status: "Completed",
     amount: "$150",
   },
   {
@@ -36,7 +33,6 @@ const bookings = [
     email: "emily@example.com",
     tour: "The Golden Desert Trek",
     date: "2026-01-05",
-    status: "Cancelled",
     amount: "$350",
   },
   {
@@ -45,17 +41,9 @@ const bookings = [
     email: "david@example.com",
     tour: "Imperial Cities Tour",
     date: "2026-02-14",
-    status: "Confirmed",
     amount: "$1100",
   },
 ];
-
-const statusColors: Record<string, string> = {
-  Pending: "bg-orange-100 text-orange-700",
-  Confirmed: "bg-emerald-100 text-emerald-700",
-  Completed: "bg-blue-100 text-blue-700",
-  Cancelled: "bg-red-100 text-red-700",
-};
 
 export default function BookingsPage() {
   return (
@@ -86,13 +74,6 @@ export default function BookingsPage() {
             className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
           />
         </div>
-        <select className="px-4 py-2 border border-gray-200 rounded-lg bg-white text-gray-700 focus:outline-none focus:border-emerald-500">
-          <option>All Status</option>
-          <option>Pending</option>
-          <option>Confirmed</option>
-          <option>Completed</option>
-          <option>Cancelled</option>
-        </select>
       </div>
 
       {/* Table */}
@@ -115,9 +96,6 @@ export default function BookingsPage() {
                 </th>
                 <th className="py-4 px-6 text-sm font-semibold text-gray-600">
                   Amount
-                </th>
-                <th className="py-4 px-6 text-sm font-semibold text-gray-600">
-                  Status
                 </th>
                 <th className="py-4 px-6 text-sm font-semibold text-gray-600 text-right">
                   Actions
@@ -151,13 +129,6 @@ export default function BookingsPage() {
                   </td>
                   <td className="py-4 px-6 text-sm font-medium text-gray-900">
                     {booking.amount}
-                  </td>
-                  <td className="py-4 px-6">
-                    <span
-                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${statusColors[booking.status] || "bg-gray-100 text-gray-800"}`}
-                    >
-                      {booking.status}
-                    </span>
                   </td>
                   <td className="py-4 px-6 text-right">
                     <div className="flex items-center justify-end gap-2">
