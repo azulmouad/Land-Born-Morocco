@@ -30,6 +30,7 @@ interface Booking {
   date: string;
   amount: string;
   status: "Confirmed" | "Not Answered" | "Canceled";
+  message?: string;
 }
 
 const statusConfig: Record<
@@ -56,6 +57,8 @@ const bookings: Booking[] = [
     date: "2025-11-15",
     amount: "$350",
     status: "Not Answered",
+    message:
+      "Hi, I'm interested in this tour for 2 people. Can we customize the itinerary?",
   },
   {
     id: "#BK-7891",
@@ -67,6 +70,7 @@ const bookings: Booking[] = [
     date: "2025-12-01",
     amount: "$550",
     status: "Confirmed",
+    message: "Looking forward to this trip! Do you provide airport pickup?",
   },
   {
     id: "#BK-7892",
@@ -78,6 +82,7 @@ const bookings: Booking[] = [
     date: "2025-10-20",
     amount: "$150",
     status: "Confirmed",
+    message: "We are a group of 4. Is there a group discount available?",
   },
   {
     id: "#BK-7893",
@@ -89,6 +94,7 @@ const bookings: Booking[] = [
     date: "2026-01-05",
     amount: "$350",
     status: "Canceled",
+    message: "Unfortunately, I need to cancel due to schedule conflicts.",
   },
   {
     id: "#BK-7894",
@@ -100,11 +106,23 @@ const bookings: Booking[] = [
     date: "2026-02-14",
     amount: "$1100",
     status: "Not Answered",
+    message:
+      "Planning a honeymoon trip. Can you arrange special accommodations?",
   },
 ];
 
 export default function BookingsPage() {
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+
+  const handleStatusChange = (newStatus: Booking["status"]) => {
+    if (selectedBooking) {
+      // Here you would update the booking status in your backend
+      console.log(
+        `Updating booking ${selectedBooking.id} status to ${newStatus}`,
+      );
+      setSelectedBooking({ ...selectedBooking, status: newStatus });
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -152,13 +170,13 @@ export default function BookingsPage() {
                   Tour
                 </th>
                 <th className="py-4 px-6 text-sm font-semibold text-gray-600">
-                  Date
-                </th>
-                <th className="py-4 px-6 text-sm font-semibold text-gray-600">
                   Amount
                 </th>
                 <th className="py-4 px-6 text-sm font-semibold text-gray-600">
                   Status
+                </th>
+                <th className="py-4 px-6 text-sm font-semibold text-gray-600">
+                  Date
                 </th>
                 <th className="py-4 px-6 text-sm font-semibold text-gray-600 text-right">
                   Actions
@@ -187,9 +205,6 @@ export default function BookingsPage() {
                   <td className="py-4 px-6 text-sm text-gray-700">
                     {booking.tour}
                   </td>
-                  <td className="py-4 px-6 text-sm text-gray-700">
-                    {booking.date}
-                  </td>
                   <td className="py-4 px-6 text-sm font-medium text-gray-900">
                     {booking.amount}
                   </td>
@@ -206,6 +221,9 @@ export default function BookingsPage() {
                         </span>
                       );
                     })()}
+                  </td>
+                  <td className="py-4 px-6 text-sm text-gray-700">
+                    {booking.date}
                   </td>
                   <td className="py-4 px-6 text-right">
                     <div className="flex items-center justify-end gap-2">
@@ -382,19 +400,32 @@ export default function BookingsPage() {
                   <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">
                     Status
                   </p>
-                  {(() => {
-                    const config = statusConfig[selectedBooking.status];
-                    const StatusIcon = config.icon;
-                    return (
-                      <span
-                        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${config.bg} ${config.color}`}
-                      >
-                        <StatusIcon className="w-4 h-4" />
-                        {selectedBooking.status}
-                      </span>
-                    );
-                  })()}
+                  <select
+                    value={selectedBooking.status}
+                    onChange={(e) =>
+                      handleStatusChange(e.target.value as Booking["status"])
+                    }
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm font-medium"
+                  >
+                    <option value="Confirmed">✓ Confirmed</option>
+                    <option value="Not Answered">⏱ Not Answered</option>
+                    <option value="Canceled">✕ Canceled</option>
+                  </select>
                 </div>
+
+                {/* Message */}
+                {selectedBooking.message && (
+                  <div className="pt-4 border-t border-gray-100">
+                    <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">
+                      Message
+                    </p>
+                    <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {selectedBooking.message}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -405,9 +436,6 @@ export default function BookingsPage() {
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Close
-              </button>
-              <button className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 transition-colors">
-                Delete Booking
               </button>
             </div>
           </div>
