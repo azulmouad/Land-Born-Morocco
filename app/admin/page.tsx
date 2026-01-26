@@ -88,16 +88,6 @@ const recentBookings = [
 export default function AdminDashboard() {
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-500 mt-1">
-            Welcome back! Here's what's happening today.
-          </p>
-        </div>
-      </div>
-
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {stats.map((stat, index) => {
@@ -108,10 +98,8 @@ export default function AdminDashboard() {
               className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow"
             >
               <div className="flex items-center gap-4">
-                <div className={`p-3 rounded-lg ${stat.color} bg-opacity-10`}>
-                  <Icon
-                    className={`w-6 h-6 ${stat.color.replace("bg-", "text-")}`}
-                  />
+                <div className={`p-3 rounded-lg ${stat.color}`}>
+                  <Icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
                   <h3 className="text-3xl font-bold text-gray-900">
