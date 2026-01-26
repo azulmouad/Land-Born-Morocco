@@ -43,13 +43,17 @@ export default function AboutProfilePage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="w-full mx-auto max-w-[1600px] space-y-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">About Me</h1>
           <p className="text-gray-500 mt-1">Manage your profile information</p>
         </div>
-        <AdminButton onClick={handleSubmit} isLoading={isLoading}>
+        <AdminButton
+          onClick={handleSubmit}
+          isLoading={isLoading}
+          className="shrink-0"
+        >
           Save Changes
         </AdminButton>
       </div>
