@@ -31,17 +31,20 @@ export default function CreateFAQPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="flex items-center justify-between mb-8">
+    <div className="w-full mx-auto max-w-[1600px]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-bold text-slate-800">Create FAQ</h1>
           <p className="text-slate-500 mt-1">
             Add a commonly asked question and its answer
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-3 shrink-0">
           <AdminButton variant="outline" onClick={() => window.history.back()}>
             Back
+          </AdminButton>
+          <AdminButton onClick={handleSubmit} isLoading={isLoading}>
+            Save FAQ
           </AdminButton>
         </div>
       </div>
@@ -70,11 +73,7 @@ export default function CreateFAQPage() {
           rows={5}
         />
 
-        <div className="pt-4 border-t border-slate-100 flex justify-end">
-          <AdminButton onClick={handleSubmit} isLoading={isLoading}>
-            Save FAQ
-          </AdminButton>
-        </div>
+        <div className="pt-4 border-t border-slate-100"></div>
       </div>
     </div>
   );
