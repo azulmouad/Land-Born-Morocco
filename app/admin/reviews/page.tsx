@@ -1,5 +1,5 @@
 import React from "react";
-import { Plus, Trash2, Star, CheckCircle, XCircle } from "lucide-react";
+import { Plus, Trash2, Star } from "lucide-react";
 
 const reviews = [
   {
@@ -8,7 +8,6 @@ const reviews = [
     rating: 5,
     date: "2023-11-12",
     comment: "Amazing experience! The desert tour was unforgettable.",
-    status: "Published",
   },
   {
     id: 2,
@@ -16,7 +15,6 @@ const reviews = [
     rating: 4,
     date: "2023-10-05",
     comment: "Great guide, but the hotel could be better.",
-    status: "Pending",
   },
   {
     id: 3,
@@ -24,7 +22,6 @@ const reviews = [
     rating: 5,
     date: "2023-09-20",
     comment: "Well organized and professional.",
-    status: "Published",
   },
   {
     id: 4,
@@ -32,7 +29,6 @@ const reviews = [
     rating: 2,
     date: "2023-08-15",
     comment: "Too hot and too much walking.",
-    status: "Rejected",
   },
 ];
 
@@ -75,34 +71,9 @@ export default function ReviewsPage() {
                   <span className="text-xs text-gray-400">{review.date}</span>
                 </div>
                 <p className="text-gray-600 mb-3">{review.comment}</p>
-
-                <div className="flex items-center gap-3">
-                  {review.status === "Published" && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
-                      <CheckCircle className="w-3 h-3" /> Published
-                    </span>
-                  )}
-                  {review.status === "Pending" && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
-                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />{" "}
-                      Pending
-                    </span>
-                  )}
-                  {review.status === "Rejected" && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
-                      <XCircle className="w-3 h-3" /> Rejected
-                    </span>
-                  )}
-                </div>
               </div>
 
               <div className="flex gap-2 self-start md:self-center">
-                <button
-                  className="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
-                  title="Approve"
-                >
-                  <CheckCircle className="w-5 h-5" />
-                </button>
                 <button
                   className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                   title="Delete"
