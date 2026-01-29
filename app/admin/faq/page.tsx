@@ -1,5 +1,5 @@
 import React from "react";
-import { Plus, Trash2, Edit2, HelpCircle } from "lucide-react";
+import { Plus, Trash2, Edit2, HelpCircle, Home } from "lucide-react";
 
 const faqs = [
   {
@@ -7,18 +7,21 @@ const faqs = [
     question: "What should I pack?",
     answer: "Comfortable shoes, sunscreen, hat...",
     category: "General",
+    showOnHome: true,
   },
   {
     id: 2,
     question: "Is it safe to travel alone?",
     answer: "Yes, Morocco is generally very safe...",
     category: "Safety",
+    showOnHome: true,
   },
   {
     id: 3,
     question: "Do I need a visa?",
     answer: "It depends on your country of origin...",
     category: "Legal",
+    showOnHome: false,
   },
 ];
 
@@ -51,10 +54,16 @@ export default function FAQPage() {
                     </h3>
                   </div>
                   <p className="text-gray-600 pl-7 text-sm">{faq.answer}</p>
-                  <div className="pl-7 pt-1">
+                  <div className="pl-7 pt-1 flex items-center gap-2">
                     <span className="inline-flex px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-600">
                       {faq.category}
                     </span>
+                    {faq.showOnHome && (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 text-emerald-700">
+                        <Home className="w-3 h-3" />
+                        On Home
+                      </span>
+                    )}
                   </div>
                 </div>
 

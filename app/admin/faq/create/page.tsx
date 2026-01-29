@@ -11,6 +11,7 @@ export default function CreateFAQPage() {
   const [formData, setFormData] = useState({
     question: "",
     answer: "",
+    showOnHome: false,
   });
 
   const handleInputChange = (
@@ -27,7 +28,7 @@ export default function CreateFAQPage() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsLoading(false);
     alert("FAQ created successfully! (Mock)");
-    setFormData({ question: "", answer: "" }); // Reset after add
+    setFormData({ question: "", answer: "", showOnHome: false }); // Reset after add
   };
 
   return (
@@ -72,6 +73,33 @@ export default function CreateFAQPage() {
           placeholder="Provide a helpful and detailed answer..."
           rows={5}
         />
+
+        {/* Show on Home Toggle */}
+        <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg border border-slate-200">
+          <div>
+            <label className="text-sm font-medium text-slate-700">
+              Show on Home Screen
+            </label>
+            <p className="text-xs text-slate-500 mt-1">
+              Display this FAQ on the homepage FAQ section
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() =>
+              setFormData((prev) => ({ ...prev, showOnHome: !prev.showOnHome }))
+            }
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+              formData.showOnHome ? "bg-emerald-500" : "bg-slate-300"
+            }`}
+          >
+            <span
+              className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                formData.showOnHome ? "translate-x-6" : "translate-x-1"
+              }`}
+            />
+          </button>
+        </div>
 
         <div className="pt-4 border-t border-slate-100"></div>
       </div>
